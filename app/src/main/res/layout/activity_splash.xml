@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".model.SplashActivity">
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src = "@drawable/splash_image"
+        android:layout_marginTop="-50dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="동취미"
+        android:textSize="24sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="같은 취미를 가진 사람들의 모임"
+        android:textSize="16sp"
+        />
+</LinearLayout>
