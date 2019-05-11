@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="invisible" />
+
         <com.google.android.gms.common.SignInButton
             android:layout_width="match_parent"
             android:id="@+id/loginActivity_button_google_login"
@@ -45,19 +46,35 @@
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="60dp" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="20dp" />
+        <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+            android:id="@+id/buttonOAuthLoginImg"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/loginActivity_button_login"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/loginActivity_button_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그인"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/loginActivity_button_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:layout_weight="1"
+
+            />
+    </LinearLayout>
+
 
 </RelativeLayout>

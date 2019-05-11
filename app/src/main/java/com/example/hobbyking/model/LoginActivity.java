@@ -52,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         setTitle("로 그 인");
         SignInButton googleLoginButton = (SignInButton)findViewById(R.id.loginActivity_button_google_login);
         mAuth = FirebaseAuth.getInstance();
+
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -135,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         else
         {
-
         }
     }
     private void Logout(){
