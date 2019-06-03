@@ -1,5 +1,6 @@
 package com.example.hobbyking.model;
 
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import com.example.hobbyking.fragment.ClassinfoFragment;
 import com.example.hobbyking.fragment.ClassreviewFragment;
 import com.example.hobbyking.fragment.ClasstimeFragment;
 import com.example.hobbyking.fragment.TutorinfoFragment;
+
+import java.util.List;
 
 public class ClassdetailActivity extends AppCompatActivity {
 
