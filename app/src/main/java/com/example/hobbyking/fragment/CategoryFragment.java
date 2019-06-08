@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +22,13 @@ import com.example.hobbyking.model.MainActivity;
 
 public class CategoryFragment extends Fragment {
 
+    CategoryMainFragment categoryMainFragment = new CategoryMainFragment();
     View fragment;
+    FragmentTransaction transaction;
+    FragmentManager fragmentManager;
     @Nullable
     @Override
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         fragment = inflater.inflate(R.layout.fragment_category, container, false);
@@ -77,8 +84,11 @@ public class CategoryFragment extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             if (position == 0) {
-                                Intent intent = new Intent(fragment.getContext(),MainActivity.class);
-                                startActivity(intent);
+                                fragmentManager = getFragmentManager();
+                                assert fragmentManager != null;
+                                transaction = fragmentManager.beginTransaction();
+                                transaction.replace(R.id.mainActivity_frame_layout, categoryMainFragment).commitAllowingStateLoss();
+
                             }
                         }
                     });
