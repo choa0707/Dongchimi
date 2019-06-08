@@ -3,12 +3,12 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/baseline_home_24"
-        android:title="HOME"
+        android:title="홈"
         />
     <item
-        android:id="@+id/navigation_search"
-        android:icon="@drawable/baseline_search_24"
-        android:title="SEARCH"
+        android:id="@+id/navigation_category"
+        android:icon="@drawable/baseline_arrow_drop_down_24"
+        android:title="카테고리"
         />
     <item
         android:id="@+id/navigation_wish"
@@ -18,7 +18,7 @@
     <item
         android:id="@+id/navigation_chat"
         android:icon="@drawable/baseline_chat_bubble_outline_24"
-        android:title="CHAT"
+        android:title="채팅"
         />
     <item
         android:id="@+id/navigation_more"
