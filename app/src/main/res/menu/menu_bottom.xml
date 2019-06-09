@@ -13,14 +13,14 @@
         />
     <item
         android:id="@+id/navigation_wish"
-        android:icon="@drawable/ic_favorit"
-        android:title="FAVORITE"
+        android:icon="@drawable/ic_home"
+        android:title="위시리스트"
         />
 
     <item
         android:id="@+id/navigation_mypage"
-        android:icon="@drawable/ic_mypage"
-        android:title="MYPAGE"
+        android:icon="@drawable/ic_home"
+        android:title="마이페이지"
         />
 
 </menu>

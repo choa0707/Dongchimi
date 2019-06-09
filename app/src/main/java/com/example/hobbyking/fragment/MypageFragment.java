@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.example.hobbyking.R;
 import com.example.hobbyking.model.ClassaddActivity;
 import com.example.hobbyking.model.HomeViewpagerAdapter;
+import com.example.hobbyking.model.MypageClasslistActivity;
 import com.example.hobbyking.model.MypageMyinfoActivity;
 
 public class MypageFragment extends Fragment {
@@ -44,7 +45,7 @@ public class MypageFragment extends Fragment {
         classlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ClassaddActivity.class);
+                Intent intent = new Intent(getActivity(), MypageClasslistActivity.class);
                 startActivity(intent);
             }
         });
