@@ -43,20 +43,29 @@
 
                 >
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:background="@drawable/namecolor"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="이름"
                     />
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:background="@drawable/gendercolor"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="성별"/>
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:background="@drawable/agecolor"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="나이"/>
 
             </LinearLayout>
@@ -66,27 +75,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"
-
+            android:gravity="left|center"
+            android:paddingLeft="30dp"
             android:text="튜터등록하기"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"
+            android:gravity="left|center"
+            android:paddingLeft="30dp"
             android:text="수강신청서"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"
+            android:gravity="left|center"
+            android:paddingLeft="30dp"
             android:text="온라인강의"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"
+            android:gravity="left|center"
+            android:paddingLeft="30dp"
             android:text="내정보"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"
+            android:gravity="left|center"
+            android:paddingLeft="30dp"
             android:text="내가올린강의"/>
 
     </LinearLayout>

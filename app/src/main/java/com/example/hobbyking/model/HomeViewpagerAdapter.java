@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.example.hobbyking.R;
 
 public class HomeViewpagerAdapter extends PagerAdapter {
-    private int[] images = {R.drawable.test1, R.drawable.test2, R.drawable.test3};
+    private int[] images = {R.drawable.i1, R.drawable.i1, R.drawable.i1};
     private LayoutInflater inflater;
     private Context context;
 

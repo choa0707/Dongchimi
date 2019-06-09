@@ -9,25 +9,67 @@
     android:gravity="center"
     android:layout_margin="10dp"
     >
-    <EditText
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/signupActivity_edittext_email"
-        android:hint="Email"
-        />
-    <EditText
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="12">
+
+        <EditText
+            android:layout_marginBottom="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signupActivity_edittext_email"
+            android:hint="Email"
+            />
+        <EditText
+            android:layout_marginBottom="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:id="@+id/signupActivity_edittext_password"
+            />
+        <EditText
+            android:layout_marginBottom="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password확인"
+            android:id="@+id/signupActivity_edittext_password_check"/>
+        <EditText
+            android:layout_marginBottom="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이름"
+            android:id="@+id/signupActivity_edittext_name"
+            />
+        <Spinner
+            android:layout_marginBottom="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/gender_spinner">
+        </Spinner>
+
+        <DatePicker
+
+            android:id="@+id/datepicker"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            />
+    </LinearLayout>
+
+
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/signupActivity_edittext_password"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/signupActivity_edittext_password_check"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/signupActivity_edittext_name"
+        android:layout_height="0dp"
+        android:background="#FFFF00"
+        android:layout_weight="1"
+        android:id="@+id/signup_next"
+        android:text="다음으로"
         />
 
 </LinearLayout>
