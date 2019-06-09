@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.example.hobbyking.R;
 import com.example.hobbyking.fragment.CategoryFragment;
 import com.example.hobbyking.fragment.HomeFragment;
+import com.example.hobbyking.fragment.MypageFragment;
 import com.example.hobbyking.fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
     // 4개의 메뉴에 들어갈 Fragment들
     private HomeFragment homefragment = new HomeFragment();
-    private SearchFragment searchfragment = new SearchFragment();
+    private MypageFragment mypageFragment = new MypageFragment();
     private CategoryFragment categoryfragment = new CategoryFragment();
 
     @Override
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case R.id.navigation_category: {
                         transaction.replace(R.id.mainActivity_frame_layout, categoryfragment).commitAllowingStateLoss();
+                        break;
+                    }
+                    case R.id.navigation_mypage: {
+                        transaction.replace(R.id.mainActivity_frame_layout, mypageFragment).commitAllowingStateLoss();
                         break;
                     }
 

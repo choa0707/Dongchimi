@@ -3,28 +3,24 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/ic_home"
         android:title="홈"
         />
     <item
         android:id="@+id/navigation_category"
-        android:icon="@drawable/baseline_arrow_drop_down_24"
+        android:icon="@drawable/ic_category"
         android:title="카테고리"
         />
     <item
         android:id="@+id/navigation_wish"
-        android:icon="@drawable/baseline_favorite_border_24"
+        android:icon="@drawable/ic_favorit"
         android:title="FAVORITE"
         />
+
     <item
-        android:id="@+id/navigation_chat"
-        android:icon="@drawable/baseline_chat_bubble_outline_24"
-        android:title="채팅"
-        />
-    <item
-        android:id="@+id/navigation_more"
-        android:icon="@drawable/baseline_more_horiz_24"
-        android:title="MORE"
+        android:id="@+id/navigation_mypage"
+        android:icon="@drawable/ic_mypage"
+        android:title="MYPAGE"
         />
 
 </menu>
