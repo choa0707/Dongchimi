@@ -1,8 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".model.SignupActivity2">
-</android.support.constraint.ConstraintLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".model.SignupActivity2" android:layout_height="match_parent" android:layout_width="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        >
+     <ImageButton
+         android:id="@+id/backbtn2"
+         android:layout_margin="10dp"
+         android:src="@drawable/ic__back"
+         android:layout_width="25dp" android:layout_height="25dp"
+         />
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:paddingRight="25dp"
+         android:text="회원가입"
+         android:gravity="center"
+         android:textSize="25sp"
+         />
+
+
+    </LinearLayout>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="0dp"
+     android:layout_weight="8"
+     android:gravity="center"
+     android:orientation="vertical">
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="20sp"
+      android:text="관심분야"
+      android:layout_marginLeft="30dp"
+      android:textStyle="bold"
+      android:layout_marginBottom="10dp"
+      android:layout_gravity="left"/>
+  <GridLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginVertical="10dp"
+      android:columnCount="2"
+
+      android:layout_gravity="center"
+      android:rowCount="11"
+      android:orientation="horizontal"
+      >
+   <ToggleButton
+      android:id="@+id/toggle_button1"
+      android:background="@drawable/my_toggle_button"
+       android:layout_gravity="fill"
+      android:textOn="뷰티"
+      android:textOff="뷰티" />
+   <ToggleButton
+       android:background="@drawable/my_toggle_button"
+       android:layout_gravity="fill"
+       android:clickable="false"
+       android:textOn=""
+       android:textOff="" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button2"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="프로그래밍"
+       android:textOff="프로그래밍" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button3"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="여행"
+       android:textOff="여행" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button4"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="영상제작"
+       android:textOff="영상제작" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button5"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="운동"
+       android:textOff="운동" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button6"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="영어회화"
+       android:textOff="영어회화" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn=""
+       android:clickable="false"
+       android:textOff="" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn=""
+       android:clickable="false"
+       android:textOff="" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button7"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="요리"
+       android:textOff="요리" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn=""
+       android:clickable="false"
+       android:textOff="" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn=""
+       android:clickable="false"
+       android:textOff="" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button8"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="포토샵"
+       android:textOff="포토샵" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button9"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="음악"
+       android:textOff="음악" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button10"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="중국어"
+       android:textOff="중국어" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn=""
+       android:clickable="false"
+       android:textOff="" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:id="@+id/toggle_button11"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn="주식"
+       android:textOff="주식" />
+   <ToggleButton
+       android:layout_gravity="fill"
+       android:paddingHorizontal="70dp"
+       android:background="@drawable/my_toggle_button"
+       android:textOn=""
+       android:clickable="false"
+       android:textOff="" />
+
+
+
+  </GridLayout>
+
+ </LinearLayout>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="0dp"
+     android:layout_weight="1">
+  <Button
+      android:id="@+id/signup_finish"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="완료"
+      android:background="#FFFF00"
+      android:layout_gravity="bottom"/>
+ </LinearLayout>
+
+</LinearLayout>

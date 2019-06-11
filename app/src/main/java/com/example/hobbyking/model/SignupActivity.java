@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.hobbyking.R;
@@ -20,11 +21,13 @@ public class SignupActivity extends AppCompatActivity {
     Date date = new Date(now);
     String s_birth;
     Button signupNext;
+    ImageButton signupback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        signupback = (ImageButton) findViewById(R.id.backbtn1);
         signupNext = (Button)findViewById(R.id.signup_next);
         mDate = (DatePicker)findViewById(R.id.datepicker);
         final Spinner spinner = (Spinner) findViewById(R.id.gender_spinner);
@@ -45,6 +48,13 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SignupActivity2.class);
                 startActivity(intent);
+            }
+        });
+
+        signupback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

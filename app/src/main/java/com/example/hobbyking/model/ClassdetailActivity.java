@@ -19,7 +19,7 @@ public class ClassdetailActivity extends AppCompatActivity {
 
     CustomSwipeAdapter adapter;
     ViewPager viewPager;
-
+    private CircleAnimIndicator circleAnimIndicator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,11 @@ public class ClassdetailActivity extends AppCompatActivity {
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         adapter = new CustomSwipeAdapter(this);
         viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(mOnPageChangeListener);
+        circleAnimIndicator = (CircleAnimIndicator)findViewById(R.id.circleAnimIndicator);
+        circleAnimIndicator.setItemMargin(15);
+        circleAnimIndicator.setAnimDuration(300);
+        circleAnimIndicator.createDotPanel(3, R.drawable.baseline_favorite_border_black_18 , R.drawable.baseline_favorite_black_18);
 
         Button button_classinfo = (Button)findViewById(R.id.classInfo);
         Button button_tutorinfo = (Button)findViewById(R.id.tutorInfo);
@@ -64,4 +69,18 @@ public class ClassdetailActivity extends AppCompatActivity {
             }
         });
     }
+    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+        @Override
+        public void onPageSelected(int position) {
+            circleAnimIndicator.selectDot(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+        }
+    };
 }

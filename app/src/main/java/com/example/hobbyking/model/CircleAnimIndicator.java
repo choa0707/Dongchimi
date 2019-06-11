@@ -1,7 +1,9 @@
 package com.example.hobbyking.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -53,7 +55,6 @@ public class CircleAnimIndicator extends LinearLayout {
 
         mDefaultCircle = defaultCircle;
         mSelectCircle = selectCircle;
-
         imageDot = new ImageView[count];
 
         for (int i = 0; i < count; i++) {

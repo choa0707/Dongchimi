@@ -75,27 +75,33 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center|left"
             android:background="@drawable/btn_background"
             android:text="튜터등록하기"/>
         <Button
             android:id="@+id/mypage_classadd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center|left"
             android:background="@drawable/btn_background"
             android:text="클래스등록"/>
         <Button
+            android:gravity="center|left"
             android:id="@+id/mypage_classlist"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"
             android:text="수강목록"/>
         <Button
+            android:gravity="center|left"
             android:id="@+id/mypage_myinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"
             android:text="내정보"/>
         <Button
+            android:gravity="center|left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"

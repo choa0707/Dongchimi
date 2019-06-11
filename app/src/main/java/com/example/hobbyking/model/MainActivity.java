@@ -13,6 +13,7 @@ import com.example.hobbyking.fragment.CategoryFragment;
 import com.example.hobbyking.fragment.HomeFragment;
 import com.example.hobbyking.fragment.MypageFragment;
 import com.example.hobbyking.fragment.SearchFragment;
+import com.example.hobbyking.fragment.WishFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homefragment = new HomeFragment();
     private MypageFragment mypageFragment = new MypageFragment();
     private CategoryFragment categoryfragment = new CategoryFragment();
+    private WishFragment wishFragment = new WishFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case R.id.navigation_mypage: {
                         transaction.replace(R.id.mainActivity_frame_layout, mypageFragment).commitAllowingStateLoss();
+                        break;
+                    }
+                    case R.id.navigation_wish: {
+                        transaction.replace(R.id.mainActivity_frame_layout, wishFragment).commitAllowingStateLoss();
                         break;
                     }
 

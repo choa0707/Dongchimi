@@ -13,13 +13,13 @@
         />
     <item
         android:id="@+id/navigation_wish"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/baseline_favorite_black_18"
         android:title="위시리스트"
         />
 
     <item
         android:id="@+id/navigation_mypage"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/baseline_perm_identity_black_18"
         android:title="마이페이지"
         />
 
