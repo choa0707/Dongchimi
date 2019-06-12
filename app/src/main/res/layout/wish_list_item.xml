@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/wish_image"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="220dp"
         android:src="@mipmap/ic_launcher"
         />
 

@@ -7,18 +7,20 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
     <LinearLayout
-        android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="22sp"
             android:text="동취미"
             android:gravity="center"
-            android:layout_marginVertical="30dp"/>
+            android:layout_marginVertical="10dp"/>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,18 +28,16 @@
             android:orientation="vertical"
             android:gravity="center">
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="맞춤 클래스"
-                android:textSize="22sp"/>
+                android:layout_gravity="left"
+                android:background="@drawable/fitclass"
+                android:layout_width="100dp"
+                android:layout_height="20dp"/>
             <view
                 android:id="@+id/view1"
                 class="android.support.v4.view.ViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginBottom="15dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
+                android:layout_height="220dp"
+                android:layout_marginBottom="15dp" />
 
             <com.example.hobbyking.model.CircleAnimIndicator
                 android:id="@+id/circleAnimIndicator"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
-                android:layout_marginBottom="15dp" />
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,25 +64,23 @@
             android:orientation="vertical"
             android:gravity="center">
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="인기 클래스"
-                android:textSize="22sp"/>
+                android:layout_gravity="left"
+                android:background="@drawable/popular"
+                android:layout_width="100dp"
+                android:layout_height="20dp"/>
             <view
                 android:id="@+id/view2"
                 class="android.support.v4.view.ViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginBottom="15dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
+                android:layout_height="220dp"
+                android:layout_marginBottom="15dp" />
             <com.example.hobbyking.model.CircleAnimIndicator
                 android:id="@+id/circleAnimIndicator2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
-                android:layout_marginBottom="15dp" />
+                android:layout_marginBottom="5dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,26 +99,24 @@
             android:orientation="vertical"
             android:gravity="center">
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="신규 클래스"
-                android:textSize="22sp"/>
+                android:layout_gravity="left"
+                android:background="@drawable/newclass"
+                android:layout_width="100dp"
+                android:layout_height="20dp"/>
 
             <view
                 android:id="@+id/view3"
                 class="android.support.v4.view.ViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginBottom="15dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
+                android:layout_height="220dp"
+                android:layout_marginBottom="15dp"/>
             <com.example.hobbyking.model.CircleAnimIndicator
                 android:id="@+id/circleAnimIndicator3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
-                android:layout_marginBottom="15dp" />
+                android:layout_marginBottom="5dp" />
                 <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

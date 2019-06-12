@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"
         android:title="홈"
         />
     <item
         android:id="@+id/navigation_category"
         android:icon="@drawable/ic_category"
+        app:showAsAction="ifRoom"
         android:title="카테고리"
         />
     <item
         android:id="@+id/navigation_wish"
         android:icon="@drawable/baseline_favorite_black_18"
+        app:showAsAction="ifRoom"
         android:title="위시리스트"
         />
 
     <item
         android:id="@+id/navigation_mypage"
         android:icon="@drawable/baseline_perm_identity_black_18"
+        app:showAsAction="ifRoom"
         android:title="마이페이지"
         />
 

@@ -7,15 +7,29 @@
     tools:context=".model.LoginActivity"
 
     >
+    <!--<TextView
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:text="로그인"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_centerInParent="true"
-
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"/>
 
         <EditText
             android:id="@+id/loginActivity_edittext_id"
@@ -32,12 +46,6 @@
             android:hint="PassWord"
             android:inputType="textWebPassword" />
 
-        <ProgressBar
-            android:id="@+id/loginActivity_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="invisible" />
 
 
         <com.google.android.gms.common.SignInButton
@@ -45,9 +53,10 @@
             android:id="@+id/loginActivity_button_google_login"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="60dp" />
+            android:layout_marginTop="20dp" />
 
-        <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+        <Button
+            android:background="@drawable/naverloginbutton"
             android:id="@+id/buttonOAuthLoginImg"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="30dp"

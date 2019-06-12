@@ -10,15 +10,14 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-        android:id="@+id/ib_wish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_back"
-        android:background="@android:color/transparent"/>
+            android:id="@+id/backbtn"
+            android:layout_width="25dp" android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic__back"
+            android:background="@android:color/transparent" />
 
         <TextView
             android:id="@+id/tv_wish"
@@ -50,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ib_wish"
+        app:layout_constraintTop_toBottomOf="@+id/backbtn"
         android:layout_marginTop="20dp"/>
 
 

@@ -19,6 +19,7 @@
             android:layout_margin="10dp"
             android:src="@drawable/ic__back"
             android:layout_width="25dp" android:layout_height="25dp"
+            android:background="@android:color/transparent"
             />
         <TextView
             android:layout_width="match_parent"
@@ -86,12 +87,12 @@
 
 
     <Button
+        android:backgroundTint="@color/Yellow"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#FFFF00"
         android:layout_weight="1"
         android:id="@+id/signup_next"
-        android:text="다음으로"
+        android:text="다음단계"
         />
 
 </LinearLayout>

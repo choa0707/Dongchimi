@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// Fragment
 public class WishFragment extends Fragment {
     private ArrayList<WishListItem> wishList = new ArrayList<>();
     private RecyclerView wishRecyclerView;
@@ -59,26 +60,4 @@ public class WishFragment extends Fragment {
         wishList.add(new WishListItem("레몬", "5000원",R.drawable.lemon));
         wishList.add(new WishListItem("엑셀", "20000원",R.drawable.excel));
     }
-    /*private void getData() {
-        // 임의의 데이터입니다.
-        List<String> listTitle = Arrays.asList("김치", "레몬", "엑셀");
-        List<String> listContent = Arrays.asList("10000원", "5000원", "20000원");
-        List<Integer> listResId = Arrays.asList(R.drawable.kimchi, R.drawable.lemon, R.drawable.excel);
-
-        WishListItem data = new WishListItem();
-        for (int i = 0; i < listTitle.size(); i++) {
-            // 각 List의 값들을 data 객체에 set 해줍니다.
-
-            data.setClass_title(listTitle.get(i));
-            data.setClass_price(listContent.get(i));
-            data.setClass_image_id(listResId.get(i));
-
-
-            // 각 값이 들어간 data를 adapter에 추가합니다.
-            wishAdapter.addItem(data);
-        }
-
-        // adapter의 값이 변경되었다는 것을 알려줍니다.
-        wishAdapter.notifyDataSetChanged();
-    }*/
 }

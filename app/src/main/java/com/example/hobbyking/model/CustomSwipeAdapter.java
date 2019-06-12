@@ -15,7 +15,7 @@ import com.example.hobbyking.R;
 
 public class CustomSwipeAdapter extends PagerAdapter {
 
-    private int[] images = {R.drawable.one, R.drawable.two, R.drawable.three};
+    private int[] images = {R.drawable.kimchi, R.drawable.kimchi, R.drawable.kimchi};
     private LayoutInflater inflater;
     private Context context;
 

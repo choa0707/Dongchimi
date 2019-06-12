@@ -10,25 +10,36 @@
         android:orientation="vertical"
         tools:context=".model.ClassdetailActivity"
         android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/backbtn"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic__back"
+            android:layout_width="25dp" android:layout_height="25dp"
+            android:background="@android:color/transparent"
+            />
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:text="class 정보"
             android:textSize="20dp"
 
             />
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="240dp"
             android:orientation="vertical"
             android:gravity="center">
 
             <android.support.v4.view.ViewPager
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="8"
+                android:layout_height="220dp"
                 android:id="@+id/view_pager"
                 >
             </android.support.v4.view.ViewPager>
@@ -36,8 +47,7 @@
             <com.example.hobbyking.model.CircleAnimIndicator
                 android:id="@+id/circleAnimIndicator"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:layout_marginTop="5dp" />

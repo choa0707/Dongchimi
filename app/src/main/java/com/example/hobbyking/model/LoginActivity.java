@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText id;
     private EditText password;
     private Button loginButton;
-    private ProgressBar progressBar;
     private GoogleSignInClient mGoogleSignInClient;
     private Button signupButton;
 
@@ -48,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
 
         signupButton = (Button)findViewById(R.id.loginActivity_button_signup);
         loginButton = (Button)findViewById(R.id.loginActivity_button_login);
-        progressBar = (ProgressBar)findViewById(R.id.loginActivity_progress);
 
         FirebaseApp.initializeApp(this);
         setTitle("로 그 인");
@@ -87,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private void signIn() {
-        progressBar.setVisibility(View.VISIBLE);
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -122,7 +119,6 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
-                            progressBar.setVisibility(View.INVISIBLE);
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT);

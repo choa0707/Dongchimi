@@ -20,12 +20,12 @@
 
     </LinearLayout>
     <android.support.design.widget.BottomNavigationView
-
-
         android:id="@+id/mainActivity_bottom_navigation_view"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         app:labelVisibilityMode="labeled"
+        app:itemIconTint="@drawable/navigationcolor"
+        app:itemTextColor="@drawable/navigationcolor"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/menu_bottom"
