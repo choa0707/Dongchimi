@@ -4,6 +4,11 @@
     <string name="class2">class2</string>
     <string name="class3">class3</string>
 
+    <string name="wish">위시 리스트</string>
+    <string-array name="gender">
+        <item>남자</item>
+        <item>여자</item>
+    </string-array>
     <string-array name="sort">
         <item>인기순</item>
         <item>최신순</item>
@@ -11,9 +16,4 @@
         <item>무료강의</item>
 
     </string-array>
-    <string-array name="gender">
-        <item>남자</item>
-        <item>여자</item>
-    </string-array>
-    <string name="wish">위시 리스트</string>
 </resources>

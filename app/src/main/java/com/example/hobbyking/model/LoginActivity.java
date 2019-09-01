@@ -1,160 +1,100 @@
 package com.example.hobbyking.model;
 
-import android.content.Intent;
-import android.content.pm.SigningInfo;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.hobbyking.R;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final int RC_SIGN_IN = 9001;
-    private static final String TAG = "LoginActivity";
-    private FirebaseAuth mAuth;
-    private EditText id;
-    private EditText password;
-    private Button loginButton;
-    private GoogleSignInClient mGoogleSignInClient;
-    private Button signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        signupButton = (Button)findViewById(R.id.loginActivity_button_signup);
-        loginButton = (Button)findViewById(R.id.loginActivity_button_login);
-
-        FirebaseApp.initializeApp(this);
-        setTitle("로 그 인");
-        SignInButton googleLoginButton = (SignInButton)findViewById(R.id.loginActivity_button_google_login);
-        mAuth = FirebaseAuth.getInstance();
-
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        googleLoginButton.setOnClickListener(new View.OnClickListener(){
-
+        setContentView(R.layout.activity_login2);
+        EditText id = (EditText)findViewById(R.id.loginActivity_edittext_id);
+        EditText password = (EditText)findViewById(R.id.loginActivity_edittext_password);
+        Button data = (Button)findViewById(R.id.loginActivity_button_login);
+        data.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+            public void onClick(View view) {
+                try {
 
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivity(intent);
-            }
-        });
-        loginButton.setOnClickListener(new View.OnClickListener(){
+                    String signupid = id.getText().toString();
+                    String signuppassword=password.getText().toString();
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+                    String result = new CustomTask().execute(signupid, signuppassword, "join").get().toString();
 
-    }
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
-                // ...
-            }
-        }
-    }
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT);
-                            updateUI(null);
-                        }
-
-                        // ...
+                    if(result.equals("id    ")) {
+                        Toast.makeText(LoginActivity.this,"이미 존재하는 아이디입니다.",Toast.LENGTH_SHORT).show();
+                        id.setText("");
+                        password.setText("");
+                    } else if(result.equals("ok    ")) {
+                        Log.i("실행여부", "ok");
+                        id.setText("");
+                        password.setText("");
+                        Toast.makeText(LoginActivity.this,"회원가입을 축하합니다.",Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                } catch (Exception e) {
+
+                }
+            }
+        });
     }
+    class CustomTask extends AsyncTask<String, Void, String> {
+        String sendMsg, receiveMsg;
+        @Override
+        // doInBackground의 매개값이 문자열 배열인데요. 보낼 값이 여러개일 경우를 위해 배열로 합니다.
+        protected String doInBackground(String... strings) {
+            try {
+                String str;
+                URL url = new URL("http://192.168.56.1:8080/HobbyKing/dbConnection.jsp");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");//데이터를 POST 방식으로 전송합니다.
+                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+                sendMsg = "id="+strings[0]+"&pwd="+strings[1]+"&type="+strings[2];//보낼 정보인데요. GET방식으로 작성합니다. ex) "id=rain483&pwd=1234";
+                //회원가입처럼 보낼 데이터가 여러 개일 경우 &로 구분하여 작성합니다.
+                osw.write(sendMsg);//OutputStreamWriter에 담아 전송합니다.
+                osw.flush();
+                //jsp와 통신이 정상적으로 되었을 때 할 코드들입니다.
+                if(conn.getResponseCode() == conn.HTTP_OK) {
+                    InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
+                    BufferedReader reader = new BufferedReader(tmp);
+                    StringBuffer buffer = new StringBuffer();
 
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
+                    //jsp에서 보낸 값을 받겠죠?
+                    while ((str = reader.readLine()) != null) {
+                        buffer.append(str);
+                    }
+                    receiveMsg = buffer.toString();
+                    Log.i("통신 결과", receiveMsg);
+                } else {
+                    Log.i("통신 결과", conn.getResponseCode()+"에러");
+                    // 통신이 실패했을 때 실패한 이유를 알기 위해 로그를 찍습니다.
+                }
 
-    private void updateUI(FirebaseUser currentUser) {
-
-        if (currentUser !=  null)
-        {
-            String name = currentUser.getDisplayName();
-            String email = currentUser.getEmail();
-            String photo = String.valueOf(currentUser.getPhotoUrl());
-
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //jsp로부터 받은 리턴 값입니다.
+            return receiveMsg;
         }
-        else
-        {
-        }
-    }
-    private void Logout(){
-        FirebaseAuth.getInstance().signOut();
-        mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> updateUI(null));
     }
 }

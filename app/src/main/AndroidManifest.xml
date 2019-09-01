@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".model.SignupActivity2"></activity>
+        <activity android:name=".model.LoginActivity"></activity>
+        <activity android:name=".model.SignupActivity2" />
         <activity android:name=".model.MypageClasslistActivity" />
         <activity android:name=".model.MypageMyinfoActivity" />
         <activity android:name=".model.ClassaddActivity" />
         <activity android:name=".model.ClassdetailActivity" />
         <activity android:name=".model.MypageActivity" />
         <activity android:name=".model.SignupActivity" />
-        <activity android:name=".model.LoginActivity" />
+        <activity android:name=".model.LoginActivityFirebase" />
         <activity android:name=".model.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
