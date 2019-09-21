@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
@@ -21,11 +22,19 @@ public class SignupActivity extends AppCompatActivity {
     Date date = new Date(now);
     String s_birth;
     Button signupNext;
+    String gender;
     ImageButton signupback;
+
+    EditText email, pwd, pwdcheck, name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        email=(EditText)findViewById(R.id.signupActivity_edittext_email);
+        pwd = (EditText)findViewById(R.id.signupActivity_edittext_password);
+        pwdcheck=(EditText)findViewById(R.id.signupActivity_edittext_password_check);
+        name = (EditText)findViewById(R.id.signupActivity_edittext_name);
 
         signupback = (ImageButton) findViewById(R.id.backbtn1);
         signupNext = (Button)findViewById(R.id.signup_next);
@@ -46,7 +55,19 @@ public class SignupActivity extends AppCompatActivity {
         signupNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), SignupActivity2.class);
+                intent.putExtra("email", email.getText().toString());
+                intent.putExtra("pwd", pwd.getText().toString());
+                intent.putExtra("pwdcheck", pwdcheck.getText().toString());
+                intent.putExtra("name", name.getText().toString());
+                intent.putExtra("birth", s_birth);
+                if (spinner.getSelectedItem().toString().equals("여자"))
+                {
+                    gender = "women";
+                }
+                else gender = "man";
+                intent.putExtra("gender", gender);
                 startActivity(intent);
             }
         });
