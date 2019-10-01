@@ -43,7 +43,7 @@ public class SignupActivity2 extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
                 String str;
-                URL url = new URL("http://192.168.56.1:8080/HobbyKing/dbConnection.jsp");
+                URL url = new URL("http://192.168.56.1:8080/HobbyKing/Login.jsp");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");//데이터를 POST 방식으로 전송합니다.
