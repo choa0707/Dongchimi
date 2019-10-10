@@ -52,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:inputType="textPassword"
             android:id="@+id/signupActivity_edittext_password"
             />
         <EditText
@@ -59,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password확인"
+            android:inputType="textPassword"
             android:id="@+id/signupActivity_edittext_password_check"/>
         <EditText
             android:layout_marginBottom="18dp"

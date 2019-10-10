@@ -1,5 +1,6 @@
 package com.example.hobbyking.model;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.hobbyking.R;
 
@@ -24,12 +26,14 @@ public class SignupActivity extends AppCompatActivity {
     Button signupNext;
     String gender;
     ImageButton signupback;
-
+    public static Activity SignupActivity;
     EditText email, pwd, pwdcheck, name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        SignupActivity = SignupActivity.this;
 
         email=(EditText)findViewById(R.id.signupActivity_edittext_email);
         pwd = (EditText)findViewById(R.id.signupActivity_edittext_password);
@@ -56,19 +60,25 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(), SignupActivity2.class);
-                intent.putExtra("email", email.getText().toString());
-                intent.putExtra("pwd", pwd.getText().toString());
-                intent.putExtra("pwdcheck", pwdcheck.getText().toString());
-                intent.putExtra("name", name.getText().toString());
-                intent.putExtra("birth", s_birth);
-                if (spinner.getSelectedItem().toString().equals("여자"))
+                if (!pwdcheck.getText().toString().equals(pwd.getText().toString()))
                 {
-                    gender = "women";
+                    Toast.makeText(getApplicationContext(), "비밀번호를 확인해주세요.", Toast.LENGTH_LONG);
+                    pwdcheck.setText("");
+                    pwd.setText("");
                 }
-                else gender = "man";
-                intent.putExtra("gender", gender);
-                startActivity(intent);
+                else {
+                    Intent intent = new Intent(getApplicationContext(), SignupActivity2.class);
+                    intent.putExtra("email", email.getText().toString());
+                    intent.putExtra("pwd", pwd.getText().toString());
+                    intent.putExtra("pwdcheck", pwdcheck.getText().toString());
+                    intent.putExtra("name", name.getText().toString());
+                    intent.putExtra("birth", s_birth);
+                    if (spinner.getSelectedItem().toString().equals("여자")) {
+                        gender = "women";
+                    } else gender = "man";
+                    intent.putExtra("gender", gender);
+                    startActivity(intent);
+                }
             }
         });
 

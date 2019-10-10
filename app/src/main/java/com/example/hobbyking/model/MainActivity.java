@@ -1,5 +1,7 @@
 package com.example.hobbyking.model;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +14,7 @@ import com.example.hobbyking.R;
 import com.example.hobbyking.fragment.CategoryFragment;
 import com.example.hobbyking.fragment.HomeFragment;
 import com.example.hobbyking.fragment.MypageFragment;
+import com.example.hobbyking.fragment.MypageFragmentTutor;
 import com.example.hobbyking.fragment.SearchFragment;
 import com.example.hobbyking.fragment.WishFragment;
 
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     // 4개의 메뉴에 들어갈 Fragment들
     private HomeFragment homefragment = new HomeFragment();
     private MypageFragment mypageFragment = new MypageFragment();
+    private MypageFragmentTutor mypageFragmentTutor = new MypageFragmentTutor();
     private CategoryFragment categoryfragment = new CategoryFragment();
     private WishFragment wishFragment = new WishFragment();
 
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences autoLogin = getSharedPreferences("auto", Activity.MODE_PRIVATE);
         BottomNavigationView bottomNavigationView = findViewById(R.id.mainActivity_bottom_navigation_view);
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -48,7 +53,15 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case R.id.navigation_mypage: {
-                        transaction.replace(R.id.mainActivity_frame_layout, mypageFragment).commitAllowingStateLoss();
+                        int istutor = autoLogin.getInt("TUTOR", -1);
+                        if (istutor == 0)
+                        {
+                            transaction.replace(R.id.mainActivity_frame_layout, mypageFragment).commitAllowingStateLoss();
+                        }
+                        else if (istutor == 1)
+                        {
+                            transaction.replace(R.id.mainActivity_frame_layout, mypageFragmentTutor).commitAllowingStateLoss();
+                        }
                         break;
                     }
                     case R.id.navigation_wish: {

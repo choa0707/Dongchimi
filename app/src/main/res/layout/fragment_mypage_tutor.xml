@@ -71,18 +71,25 @@
             </LinearLayout>
 
         </LinearLayout>
-        <Button
 
+        <Button
+            android:id="@+id/mypage_classadd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|left"
             android:background="@drawable/btn_background"
-            android:text="튜터등록하기"/>
+            android:text="클래스등록"/>
 
         <Button
             android:gravity="center|left"
+            android:id="@+id/mypage_classlist_tutor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_background"
+            android:text="강의 관리"/>
+        <Button
+            android:gravity="center|left"
             android:id="@+id/mypage_classlist"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_background"

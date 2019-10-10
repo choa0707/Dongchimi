@@ -1,14 +1,12 @@
 package com.example.hobbyking.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +15,11 @@ import android.widget.Toast;
 
 import com.example.hobbyking.R;
 import com.example.hobbyking.model.ClassaddActivity;
-import com.example.hobbyking.model.HomeViewpagerAdapter;
-import com.example.hobbyking.model.MainActivity;
 import com.example.hobbyking.model.MypageClasslistActivity;
 import com.example.hobbyking.model.MypageMyinfoActivity;
 import com.example.hobbyking.model.SplashActivity;
 
-public class MypageFragment extends Fragment {
-
+public class MypageFragmentTutor extends Fragment {
     View fragment;
     Button classadd, myinfo, classlist, logout;
 
@@ -34,14 +29,19 @@ public class MypageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        fragment = inflater.inflate(R.layout.fragment_mypage, container, false);
+        fragment = inflater.inflate(R.layout.fragment_mypage_tutor, container, false);
 
+        classadd = (Button)fragment.findViewById(R.id.mypage_classadd);
         myinfo = (Button)fragment.findViewById(R.id.mypage_myinfo);
         logout =(Button)fragment.findViewById(R.id.mypage_logout);
         classlist = (Button)fragment.findViewById(R.id.mypage_classlist);
-
-
-
+        classadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ClassaddActivity.class);
+                startActivity(intent);
+            }
+        });
         myinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
