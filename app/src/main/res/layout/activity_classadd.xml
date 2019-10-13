@@ -7,18 +7,37 @@
     tools:context=".model.ClassaddActivity"
     android:orientation="vertical"
     android:layout_marginHorizontal="30dp"
+    android:weightSum="14"
     android:layout_marginBottom="30dp"
 
     >
     <TextView
         android:layout_width="match_parent"
         android:gravity="center"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="class 등록"
         android:textSize="20dp"
-        android:layout_margin="20dp"
-
+        android:layout_margin="8dp"
+android:layout_weight="1"
         />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="12"
+        >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="800dp"
+        android:orientation="vertical"
+        >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -33,6 +52,7 @@
             android:text="class 제목: "
             android:layout_weight="3" />
         <EditText
+            android:id="@+id/classadd_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -40,281 +60,423 @@
             android:layout_weight="10"
             />
     </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp"
-        android:layout_weight="1"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="카테고리: "
-            android:layout_weight="3"/>
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
-            android:background="@drawable/spinnerborder" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp"
-        android:layout_weight="1"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="지역: "
-            android:layout_weight="3"/>
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
-            android:background="@drawable/spinnerborder" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_marginBottom="15dp"
-        >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="장소: " />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-
-            android:layout_weight="2"
-            android:background="@drawable/editborder" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_background_black"
-            android:text="대관리스트"
-            android:padding="0dp"
-            android:textSize="10dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp"
-        android:layout_weight="1"
-        >
-        <TextView
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="날짜: "
-            android:layout_marginRight="5dp"
-            android:layout_weight="2"/>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_calendar_today_24"/>
-        <TextView
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_marginLeft="10dp"
-            android:text="시간:" />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
-            android:layout_weight="4"
-            android:background="@drawable/editborder"
-            />
-        <TextView
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="시"
-            android:layout_weight="2"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
-            android:background="@drawable/editborder"
-            />
-        <TextView
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="분"
-            android:layout_weight="2"/>
-
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical">
         <LinearLayout
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="horizontal"
-            android:layout_weight="2"
             android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="카테고리: "
+                android:layout_weight="3"/>
 
+            <Spinner
+                android:id="@+id/classadd_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:background="@drawable/spinnerborder" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="지역: "
+                android:layout_weight="3"/>
+
+            <Spinner
+                android:id="@+id/classadd_country"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:background="@drawable/spinnerborder" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_marginBottom="15dp"
             >
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="가격: " />
+                android:layout_weight="1"
+                android:text="장소: " />
 
-            <Button
+            <TextView
+                android:id="@+id/classadd_location"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:layout_marginLeft="2dp"
-                android:background="@drawable/btn_background_black"
-                android:text="재능기부" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="2"
-
-                android:background="@drawable/btn_background_black"
-                android:text="초" />
+                android:background="@drawable/editborder" />
 
             <Button
+                android:id="@+id/classadd_location_button"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/btn_background_black"
-                android:text="중" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:layout_marginRight="2dp"
-                android:background="@drawable/btn_background_black"
-                android:text="고" />
+                android:text="대관리스트"
+                android:padding="0dp"
+                android:textSize="10dp" />
         </LinearLayout>
-        <!--나중에 없애고 프로그래밍으로 출력예정-->
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            >
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="진행 날짜: "
+                android:layout_marginRight="5dp"
+                android:layout_weight="2"/>
+            <Button
+                android:id="@+id/classadd_date_button"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/baseline_calendar_today_black_24"/>
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_marginLeft="10dp"
+                android:text="시간:" />
+            <EditText
+                android:id="@+id/classadd_date_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="4"
+                android:background="@drawable/editborder"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="시"
+                android:layout_weight="2"/>
+            <EditText
+                android:id="@+id/classadd_date_minuate"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="4"
+                android:background="@drawable/editborder"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="분"
+                android:layout_weight="2"/>
+
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            >
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="마감 날짜: "
+                android:layout_marginRight="5dp"
+                android:layout_weight="2"/>
+            <Button
+                android:id="@+id/classadd_duedate_button"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/baseline_calendar_today_24"/>
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_marginLeft="10dp"
+                android:text="시간:" />
+            <EditText
+                android:id="@+id/classadd_duedate_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="4"
+                android:background="@drawable/editborder"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="시"
+                android:layout_weight="2"/>
+            <EditText
+                android:id="@+id/classadd_duedate_minuate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="4"
+                android:background="@drawable/editborder"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="분"
+                android:layout_weight="2"/>
+
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            >
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="인원 제한: "
+                android:layout_marginRight="5dp"
+                android:layout_weight="5"/>
+
+
+            <EditText
+                android:id="@+id/classadd_limit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="8"
+                android:background="@drawable/editborder"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="명"
+                android:layout_weight="2"/>
+
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:layout_marginBottom="15dp"
+
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="가격: " />
+
+                <Button
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/btn_background_black"
+                    android:text="재능기부" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+
+                    android:background="@drawable/btn_background_black"
+                    android:text="초" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/btn_background_black"
+                    android:text="중" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/btn_background_black"
+                    android:text="고" />
+            </LinearLayout>
+            <!--나중에 없애고 프로그래밍으로 출력예정-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/classadd_price"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@drawable/underline"
+                    android:text="" />
+
+                <TextView
+
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+
+                    android:text="원" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="수업소개: "
+                android:layout_weight="3"/>
+
+            <EditText
+                android:id="@+id/classadd_details"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="10"
+                android:background="@drawable/editborder" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="튜터소개: "
+                android:layout_weight="3"/>
+
+            <EditText
+                android:id="@+id/classadd_tutor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="10"
+                android:background="@drawable/editborder" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="관련 사진/동영상: "
+                android:layout_weight="3"/>
+
+            <Button
+                android:id="@+id/classadd_image"
+                android:layout_width="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="10"
+                android:text="파일 첨부하기"
+                android:textSize="14dp" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="right"
-            android:layout_marginBottom="10dp"
+            android:weightSum="3"
             android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/cimg1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                ></ImageView>
 
-            <EditText
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:background="@drawable/underline"
-                android:text="" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-
-                android:text="원" />
 
         </LinearLayout>
 
-
-
     </LinearLayout>
 
-    <LinearLayout
-        android:gravity="center"
+</LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/classadd_register"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp"
         android:layout_weight="1"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="수업소개: "
-            android:layout_weight="3"/>
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="10"
-            android:background="@drawable/editborder" />
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp"
-        android:layout_weight="1"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="튜터소개: "
-            android:layout_weight="3"/>
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="10"
-            android:background="@drawable/editborder" />
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp"
-        android:layout_weight="1"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="관련 사진/동영상: "
-            android:layout_weight="3"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="10"
-            android:text="파일 첨부하기"
-            android:textSize="14dp" />
-    </LinearLayout>
+        android:text="등록하기"
+        ></Button>
 
 </LinearLayout>

@@ -21,12 +21,13 @@ import com.example.hobbyking.model.HomeViewpagerAdapter;
 import com.example.hobbyking.model.MainActivity;
 import com.example.hobbyking.model.MypageClasslistActivity;
 import com.example.hobbyking.model.MypageMyinfoActivity;
+import com.example.hobbyking.model.MypageTutorRegisterActivity;
 import com.example.hobbyking.model.SplashActivity;
 
 public class MypageFragment extends Fragment {
 
     View fragment;
-    Button classadd, myinfo, classlist, logout;
+    Button classadd, myinfo, classlist, logout, tutor;
 
     @Nullable
     @Override
@@ -39,9 +40,16 @@ public class MypageFragment extends Fragment {
         myinfo = (Button)fragment.findViewById(R.id.mypage_myinfo);
         logout =(Button)fragment.findViewById(R.id.mypage_logout);
         classlist = (Button)fragment.findViewById(R.id.mypage_classlist);
+        tutor = (Button)fragment.findViewById(R.id.mypage_tutor_register);
 
 
-
+        tutor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MypageTutorRegisterActivity.class);
+                startActivity(intent);
+            }
+        });
         myinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

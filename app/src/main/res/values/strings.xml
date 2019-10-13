@@ -5,6 +5,41 @@
     <string name="class3">class3</string>
 
     <string name="wish">위시 리스트</string>
+
+    <string-array name="category">
+    <item>뷰티</item>
+    <item>프로그래밍</item>
+    <item>여행</item>
+    <item>영상제작</item>
+    <item>운동</item>
+    <item>영어회화</item>
+    <item>요리</item>
+    <item>포토샵</item>
+    <item>음악</item>
+    <item>중국어</item>
+    <item>주식</item>
+</string-array>
+
+    <string-array name="country">
+        <item>서울시 강남구</item>
+        <item>서울시 서초구</item>
+        <item>수원시 권선구</item>
+        <item>수원시 영통구</item>
+        <item>부산시 해운대구</item>
+
+    </string-array>
+
+    <string-array name="bank">
+    <item>국민은행</item>
+    <item>신한은행</item>
+    <item>IBK기업은행</item>
+    <item>NH농협은행</item>
+    <item>KEB하나은행</item>
+    <item>부산은행</item>
+    <item>우리은행</item>
+    <item>SC제일은행</item>
+    <item>카카오뱅크</item>
+</string-array>
     <string-array name="gender">
         <item>남자</item>
         <item>여자</item>

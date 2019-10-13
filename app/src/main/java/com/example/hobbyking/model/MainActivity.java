@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.hobbyking.R;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case R.id.navigation_mypage: {
                         int istutor = autoLogin.getInt("TUTOR", -1);
+                        Log.i("메인페이지", Integer.toString(istutor));
                         if (istutor == 0)
                         {
                             transaction.replace(R.id.mainActivity_frame_layout, mypageFragment).commitAllowingStateLoss();

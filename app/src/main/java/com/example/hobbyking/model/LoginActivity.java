@@ -1,6 +1,7 @@
 package com.example.hobbyking.model;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -32,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-        SharedPreferences autoLogin = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+        SharedPreferences autoLogin = getSharedPreferences("auto", Context.MODE_PRIVATE);
 
 
         userId = autoLogin.getInt("UID", 0);
@@ -71,19 +72,20 @@ public class LoginActivity extends AppCompatActivity {
                         password.setText("");
                     } else if(result_set[0].equals("true")) {
                         Log.i("로그인", "로그인성공");
-
+                        Log.i("테스터", result_set[0]+"   "+result_set[1]);
                         Toast.makeText(LoginActivity.this,"로그인 되었습니다.",Toast.LENGTH_SHORT).show();
-                        SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
-                        SharedPreferences.Editor autoLogin = auto.edit();
-                        autoLogin.putInt("UID", Integer.parseInt(result_set[1]));
+                        SharedPreferences autoLogin = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor autoEditor = autoLogin.edit();
+
+                        autoEditor.putInt("UID", Integer.parseInt(result_set[1]));
                         if (Integer.parseInt(result_set[2]) == 0)
                         {
-                            autoLogin.putInt("TUTOR", 0);
+                            autoEditor.putInt("TUTOR", 0);
                         } else if (Integer.parseInt(result_set[2]) == 1)
                         {
-                            autoLogin.putInt("TUTOR", 1);
+                            autoEditor.putInt("TUTOR", 1);
                         }
-                        autoLogin.commit();
+                        autoEditor.commit();
 
                         Log.i("자동로그인", result_set[1]);
                         Log.i("튜터여부", result_set[2]);
