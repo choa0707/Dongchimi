@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -23,10 +24,14 @@ import android.widget.Toast;
 
 import com.example.hobbyking.R;
 import com.example.hobbyking.server.ConnectServer;
+import com.example.hobbyking.server.ImageServer;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -108,21 +113,41 @@ public class ClassaddActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                sendMessage = "category="+category+"&country="+country;
+                getSpinner();
+                int category_id = selectCategoryId();
+                sendMessage = "category="+category_id+"&country="+country;
+                Log.i("카테고리 선택 서버", sendMessage);
                 ConnectServer connectserver = new ConnectServer(sendMessage, "get_location.jsp");
                 try {
                     String result = connectserver.execute().get().toString();
                     if (!result.equals("fail    ")){
                         result = result.replace(" ", "");
-                        String[] result_set = result.split(",");
+                        String[] result_set = result.split("/");
                         for (int i = 0; i < result_set.length; i++)
                         {
                             locationList.add(result_set[i]);
                         }
                        charSequenceItems = locationList.toArray(new CharSequence[locationList.size()]);
-                        dialogSetting();
+                        alertDialogBuilder = new AlertDialog.Builder(ClassaddActivity.this);
+                        alertDialogBuilder.setTitle("장소선택");
+                        alertDialogBuilder.setItems(charSequenceItems, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // 프로그램을 종료한다
+                                Toast.makeText(getApplicationContext(),
+                                        charSequenceItems[id] + " 선택했습니다.",
+                                        Toast.LENGTH_SHORT).show();
+                                location = charSequenceItems[id].toString();
+                                locationTextView.setText(location);
+                                dialog.dismiss();
+                            }
+                        });
+                        Log.i("다이얼로그", "세팅오케이");
                         AlertDialog alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "해당하는 장소가 없습니다.", Toast.LENGTH_LONG);
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -143,20 +168,24 @@ public class ClassaddActivity extends AppCompatActivity {
 
     }
 
+    private int selectCategoryId() {
+        if (category.equals("뷰티"))return 1;
+        else if(category.equals("프로그래밍")) return 2;
+        else if(category.equals("여행")) return 3;
+        else if(category.equals("영상제작")) return 4;
+        else if(category.equals("운동")) return 5;
+        else if(category.equals("영어회화")) return 6;
+        else if(category.equals("요리")) return 7;
+        else if(category.equals("포토샵")) return 8;
+        else if(category.equals("음악")) return 9;
+        else if(category.equals("중국어")) return 10;
+        else if(category.equals("주식")) return 11;
+        else return 0;
+
+    }
+
     private void dialogSetting() {
-        alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
-        alertDialogBuilder.setTitle("장소선택");
-        alertDialogBuilder.setItems(charSequenceItems, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // 프로그램을 종료한다
-                        Toast.makeText(getApplicationContext(),
-                                charSequenceItems[id] + " 선택했습니다.",
-                                Toast.LENGTH_SHORT).show();
-                        location = charSequenceItems[id].toString();
-                        locationTextView.setText(location);
-                        dialog.dismiss();
-                    }
-                });
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -221,15 +250,37 @@ public class ClassaddActivity extends AppCompatActivity {
         Toast.makeText(ClassaddActivity.this, "이미지 이름 : " + imgName, Toast.LENGTH_SHORT).show();
         this.imageName = imgName;
 
-      //  DoFileUpload("http://192.168.0.37:8080/WebTest/GetImageData.jsp", imgPath);  //해당 함수를 통해 이미지 전송.
+        DoFileUpload("http://192.168.56.1:8080/HobbyKing/get_image.jsp", imgPath);  //해당 함수를 통해 이미지 전송.
 
         return imgPath;
     }
 
-    private void get_data() {
-        title = nameEdit.getText().toString();
+    public void DoFileUpload(String apiUrl, String absolutePath) {
+        Log.i("이미지 테스트 ", "1");
+        ImageServer imageServer = new ImageServer(absolutePath, "get_image.jsp", absolutePath);
+        try{
+            String result = imageServer.execute().get().toString();
+            Log.i("이미지 서버", "성공");
+        }catch (Exception e)
+        {
+            Log.i("이미지 서버", "실패");
+        }
+
+       // HttpFileUpload(apiUrl, "", absolutePath);
+
+    }
+
+
+
+
+
+    private  void getSpinner(){
         category = categorySpinner.getSelectedItem().toString();
         country = locationSpinner.getSelectedItem().toString();
+    }
+    private void get_data() {
+        title = nameEdit.getText().toString();
+
         duehour = duedate_hourEdit.getText().toString();
         duemin = duedate_minuateEdit.getText().toString();
         datehour = date_hourEdit.getText().toString();
@@ -245,7 +296,7 @@ public class ClassaddActivity extends AppCompatActivity {
 
     }
 
-    public void HttpFileUpload(String urlString, String params, String fileName) {
+  /*  public void HttpFileUpload(String urlString, String params, String fileName) {
         try {
 
             FileInputStream mFileInputStream = new FileInputStream(fileName);
@@ -304,5 +355,5 @@ public class ClassaddActivity extends AppCompatActivity {
             // TODO: handle exception
         }
     } // end of HttpFileUpload()
-
+*/
 }

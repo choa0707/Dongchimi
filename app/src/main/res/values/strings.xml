@@ -21,11 +21,9 @@
 </string-array>
 
     <string-array name="country">
-        <item>서울시 강남구</item>
-        <item>서울시 서초구</item>
-        <item>수원시 권선구</item>
-        <item>수원시 영통구</item>
-        <item>부산시 해운대구</item>
+        <item>서울시</item>
+        <item>수원시</item>
+        <item>부산시</item>
 
     </string-array>
 
