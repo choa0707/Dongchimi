@@ -53,19 +53,21 @@ public class ImageServer extends AsyncTask<String, Void, String> {
                     conn.setRequestMethod("POST");
                     Log.i("이미지 테스트 ", "4");
                     conn.setRequestProperty("Connection", "Keep-Alive");
+                    Log.i("이미지 테스트 ", "6");
                     conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+                    Log.i("이미지 테스트 ", "7");
                     conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-
+                    Log.i("이미지 테스트 ", "8");
                     conn.setRequestProperty("uploaded_file", fileName);
 
                     // write data
 
                     dos = new DataOutputStream(conn.getOutputStream());
-
+                    Log.i("이미지 테스트 ", "9");
                     dos.writeBytes(twoHyphens + boundary + lineEnd);
-
+                    Log.i("이미지 테스트 ", "10");
                     dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\"" + fileName + "\"" + lineEnd);
-
+                    Log.i("이미지 테스트 ", "11");
                     dos.writeBytes(lineEnd);
 
 

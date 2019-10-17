@@ -1,7 +1,9 @@
 package com.example.hobbyking.model;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -102,7 +104,6 @@ public class SignupActivity2 extends AppCompatActivity {
                     } else if(result.equals("ok    ")) {
                         Log.i("실행여부", "ok");
                         Toast.makeText(SignupActivity2.this,"회원가입을 축하합니다.",Toast.LENGTH_SHORT).show();
-
                     }
 
                 } catch (Exception e) {

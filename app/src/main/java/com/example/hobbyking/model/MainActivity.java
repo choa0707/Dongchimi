@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case R.id.navigation_mypage: {
-                        int istutor = autoLogin.getInt("TUTOR", -1);
+                        int istutor = autoLogin.getInt("TUTOR", 0);
                         Log.i("메인페이지", Integer.toString(istutor));
                         if (istutor == 0)
                         {
