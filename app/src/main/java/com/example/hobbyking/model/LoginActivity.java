@@ -74,10 +74,11 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("로그인", "로그인성공");
                         Log.i("테스터", result_set[0]+"   "+result_set[1]);
                         Toast.makeText(LoginActivity.this,"로그인 되었습니다.",Toast.LENGTH_SHORT).show();
+
                         SharedPreferences autoLogin = getSharedPreferences("auto", Activity.MODE_PRIVATE);
                         SharedPreferences.Editor autoEditor = autoLogin.edit();
-
                         autoEditor.putInt("UID", Integer.parseInt(result_set[1]));
+
                         if (Integer.parseInt(result_set[2]) == 0)
                         {
                             autoEditor.putInt("TUTOR", 0);

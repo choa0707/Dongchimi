@@ -1,8 +1,10 @@
 package com.example.hobbyking.model;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.Image;
@@ -113,6 +115,7 @@ public class ClassaddActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                locationList.clear();
                 getSpinner();
                 int category_id = selectCategoryId();
                 sendMessage = "category="+category_id+"&country="+country;
@@ -257,7 +260,10 @@ public class ClassaddActivity extends AppCompatActivity {
 
     public void DoFileUpload(String apiUrl, String absolutePath) {
         Log.i("이미지 테스트 ", "1");
-        ImageServer imageServer = new ImageServer(absolutePath, "get_image.jsp", absolutePath);
+        int uid;
+        SharedPreferences autoLogin = getSharedPreferences("auto", Context.MODE_PRIVATE);
+        uid = autoLogin.getInt("UID", 0);
+        ImageServer imageServer = new ImageServer(absolutePath, "get_image.jsp", absolutePath, uid);
         try{
             String result = imageServer.execute().get().toString();
             Log.i("이미지 서버", "성공");

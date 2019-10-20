@@ -1,6 +1,9 @@
 package com.example.hobbyking.server;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -15,38 +18,52 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ImageServer extends AsyncTask<String, Void, String> {
-    public String sendMsg, receiveMsg, serverUrl, fileName;
+    private String sendMsg, receiveMsg, serverUrl, fileName;
+    private int uid;
 
-    public ImageServer(String sendMsg, String serverUrl, String fileName) {
+    public ImageServer(String sendMsg, String serverUrl, String fileName, int uid) {
         this.sendMsg = sendMsg;
         this.serverUrl = "http://192.168.56.1:8080/HobbyKing/"+serverUrl;
         this.fileName = fileName;
+        this.uid = uid;
     }
+
     @Override
     // doInBackground의 매개값이 문자열 배열. 보낼 값이 여러개일 경우를 위해 배열로.
     protected String doInBackground(String... strings) {
         try {
+
             Log.i("이미지 테스트 ", "2");
             String lineEnd = "\r\n";
-
+            String root = Environment.getExternalStorageDirectory().toString();
             String twoHyphens = "--";
 
             String boundary = "*****";
 
             try {
+                String[] split_fileName = fileName.split("/");
+                String tempfileName = split_fileName[split_fileName.length-1];
+                Log.i("파일이름", tempfileName);
+                String realFileName = uid+"__"+tempfileName;
+               fileName.replaceAll(tempfileName, realFileName);
+
                 Log.i("이미지 테스트 ", "3");
                 File sourceFile = new File(fileName);
                 Log.i("이미지 테스트 ", "3");
                 DataOutputStream dos;
-
+                Log.i("이미지 테스트 ", "11");
                 if (!sourceFile.isFile()) {
                     Log.e("uploadFile", "Source File not exist :" + fileName);
 
                 } else {
+                    Log.i("이미지 테스트 ", fileName);
                     FileInputStream mFileInputStream = new FileInputStream(sourceFile);
+                    Log.i("이미지 테스트 ", "13");
                     URL connectUrl = new URL(serverUrl);
+                    Log.i("이미지 테스트 ", "14");
                     // open connection
                     HttpURLConnection conn = (HttpURLConnection) connectUrl.openConnection();
+                    Log.i("이미지 테스트 ", "15");
                     conn.setDoInput(true);
                     conn.setDoOutput(true);
                     conn.setUseCaches(false);
@@ -58,6 +75,9 @@ public class ImageServer extends AsyncTask<String, Void, String> {
                     Log.i("이미지 테스트 ", "7");
                     conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
                     Log.i("이미지 테스트 ", "8");
+                    ///"아이디값,파일이름"
+
+                    Log.i("이미지 테스트", realFileName);
                     conn.setRequestProperty("uploaded_file", fileName);
 
                     // write data
