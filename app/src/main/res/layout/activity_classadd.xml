@@ -153,14 +153,14 @@ android:layout_weight="1"
 
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="진행 날짜: "
+                android:text="수업 날짜: "
                 android:layout_marginRight="5dp"
-                android:layout_weight="2"/>
+                android:layout_weight="5"/>
             <Button
                 android:id="@+id/classadd_date_button"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:background="@drawable/baseline_calendar_today_black_24"/>
             <TextView
                 android:gravity="center"
@@ -201,6 +201,43 @@ android:layout_weight="1"
 
             />
         </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:id="@+id/classadd_week"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="선택 요일 : "
+                android:layout_marginRight="5dp"
+                android:layout_weight="8"/>
+            <TextView
+
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="진행시간 :"
+                android:layout_weight="4"/>
+            <EditText
+                android:id="@+id/classadd_date_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="3"
+                android:background="@drawable/editborder"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="분"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
         <LinearLayout
             android:gravity="center"
@@ -214,51 +251,26 @@ android:layout_weight="1"
 
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="마감 날짜: "
+                android:text="모집 마감 날짜: "
                 android:layout_marginRight="5dp"
-                android:layout_weight="2"/>
+
+                android:layout_weight="7"/>
             <Button
                 android:id="@+id/classadd_duedate_button"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/baseline_calendar_today_24"/>
-            <TextView
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:layout_marginLeft="10dp"
-                android:text="시간:" />
-            <EditText
-                android:id="@+id/classadd_duedate_hour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_weight="4"
-                android:background="@drawable/editborder"
-                />
-            <TextView
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="시"
-                android:layout_weight="2"/>
-            <EditText
-                android:id="@+id/classadd_duedate_minuate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="4"
-                android:background="@drawable/editborder"
-                />
-            <TextView
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="분"
-                android:layout_weight="2"/>
 
+                android:layout_height="30dp"
+                android:layout_weight="2"
+                android:background="@drawable/baseline_calendar_today_black_24"/>
+
+            <TextView
+                android:id="@+id/classadd_duedate_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="마감 날짜 : "
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="15"/>
             />
         </LinearLayout>
 
@@ -318,37 +330,45 @@ android:layout_weight="1"
                     android:layout_weight="3"
                     android:text="가격: " />
 
-                <Button
-
+                <ToggleButton
+                    android:id="@+id/price0"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:layout_marginLeft="2dp"
                     android:background="@drawable/btn_background_black"
-                    android:text="재능기부" />
 
-                <Button
+                    android:textOn="재능기부"
+                    android:textOff="재능기부"/>
+
+                <ToggleButton
+                    android:id="@+id/price1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
 
                     android:background="@drawable/btn_background_black"
-                    android:text="초" />
+                    android:textOn="초"
+                    android:textOff="초"/>
 
-                <Button
+                <ToggleButton
+                    android:id="@+id/price2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:background="@drawable/btn_background_black"
-                    android:text="중" />
+                    android:textOn="중"
+                    android:textOff="중"/>
 
-                <Button
+                <ToggleButton
+                    android:id="@+id/price3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:layout_marginRight="2dp"
                     android:background="@drawable/btn_background_black"
-                    android:text="고" />
+                    android:textOn="고"
+                    android:textOff="고"/>
             </LinearLayout>
             <!--나중에 없애고 프로그래밍으로 출력예정-->
             <LinearLayout
@@ -361,7 +381,7 @@ android:layout_weight="1"
 
                 <EditText
                     android:id="@+id/classadd_price"
-                    android:layout_width="50dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:background="@drawable/underline"

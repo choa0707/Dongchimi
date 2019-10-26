@@ -1,5 +1,6 @@
 package com.example.hobbyking.model;
 
+import android.app.DatePickerDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,15 +15,20 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.hobbyking.R;
 import com.example.hobbyking.server.ConnectServer;
@@ -43,24 +49,26 @@ import java.util.concurrent.ExecutionException;
 public class ClassaddActivity extends AppCompatActivity {
 
     Button locationButton, dateButton, duedateButton, imageButton, registerButton;
-    EditText nameEdit, date_hourEdit, date_minuateEdit, duedate_hourEdit, duedate_minuateEdit, priceEdit, detailEdit, tutorEdit, limitEdit;
-    TextView locationTextView;
-    String title, category, location, country, duehour, duemin, datehour,datemin, limit,detail, tutor, imageuri, price;
+    ToggleButton price0, price1, price2, price3;
+    EditText nameEdit, date_hourEdit, date_minuateEdit, priceEdit, detailEdit, tutorEdit, limitEdit, date_timeEdit;
+    TextView locationTextView, classWeek, classduedate;
+    String title, category, location, country, duehour, duemin, datehour,datemin, limit,detail, tutor, imageuri, price, locationString, date_time;
     Spinner categorySpinner, locationSpinner;
     List<String> locationList ;
     AlertDialog.Builder alertDialogBuilder;
-    String sendMessage;
+    String sendMessage, due_date;
      CharSequence[] charSequenceItems;
     ImageView image1, image2, image3;
     String imageName;
     String img_path;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
     final int PICTURE_REQUEST_CODE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classadd);
 
-
+        this.InitializeListener();
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                 .permitDiskReads()
                 .permitDiskWrites()
@@ -68,6 +76,7 @@ public class ClassaddActivity extends AppCompatActivity {
 
         image1 = (ImageView)findViewById(R.id.cimg1);
 
+        classWeek = (TextView)findViewById(R.id.classadd_week) ;
         locationList = new ArrayList<String>();
         categorySpinner = (Spinner)findViewById(R.id.classadd_category);
         locationSpinner = (Spinner)findViewById(R.id.classadd_country);
@@ -76,15 +85,18 @@ public class ClassaddActivity extends AppCompatActivity {
         duedateButton = (Button)findViewById(R.id.classadd_duedate_button);
         imageButton = (Button)findViewById(R.id.classadd_image);
         registerButton = (Button)findViewById(R.id.classadd_register);
-
+        price0 = (ToggleButton) findViewById(R.id.price0);
+        price1 = (ToggleButton)findViewById(R.id.price1);
+        price2 = (ToggleButton)findViewById(R.id.price2);
+        price3 = (ToggleButton)findViewById(R.id.price3);
+        classduedate = (TextView)findViewById(R.id.classadd_duedate_text) ;
         limitEdit = (EditText)findViewById(R.id.classadd_limit);
         nameEdit = (EditText)findViewById(R.id.classadd_name);
         date_hourEdit = (EditText)findViewById(R.id.classadd_date_hour);
         date_minuateEdit = (EditText)findViewById(R.id.classadd_date_minuate);
-        duedate_hourEdit = (EditText)findViewById(R.id.classadd_duedate_hour);
-        duedate_minuateEdit = (EditText)findViewById(R.id.classadd_duedate_minuate);
+        priceEdit = (EditText)findViewById(R.id.classadd_price) ;
         locationTextView = (TextView)findViewById(R.id.classadd_location);
-
+        date_timeEdit = (EditText)findViewById(R.id.classadd_date_time);
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
         categorySpinner.setAdapter(adapter);
@@ -95,8 +107,36 @@ public class ClassaddActivity extends AppCompatActivity {
 
         //////location 데이터 가져온후
 
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show();
+            }
+        });
+        priceEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+              //  Toast.makeText(getApplicationContext(), "Editchanger test", Toast.LENGTH_LONG).show();
+                //if (Integer.parseInt(priceEdit.getText().toString()) > price1.isChecked())
+            }
+        });
+        duedateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(ClassaddActivity.this, callbackMethod, 2019, 5, 24);
+                dialog.show();
+            }
+        });
         imageButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -150,7 +190,7 @@ public class ClassaddActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), "해당하는 장소가 없습니다.", Toast.LENGTH_LONG);
+                        Toast.makeText(getApplicationContext(), "해당하는 장소가 없습니다.", Toast.LENGTH_LONG).show();
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -159,17 +199,192 @@ public class ClassaddActivity extends AppCompatActivity {
                 }
             }
         });
+        price0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (price0.isChecked())
+                {allwhite();
+                    price0.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.Yellow));
+                    price1.setChecked(false);
+                    price2.setChecked(false);
+                    price3.setChecked(false);
+                    priceEdit.setText("0");
+                }
+                else{
+                    price0.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
+                    price0.setBackgroundResource(R.drawable.btn_background_black);
+
+                    priceEdit.setText("");
+                }
+            }
+        });
+        price1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (price1.isChecked())
+                {allwhite();
+                    price1.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.Yellow));
+                    price0.setChecked(false);
+                    price2.setChecked(false);
+                    price3.setChecked(false);
+                    priceEdit.setText("10,000");
+                }
+                else{
+                    price1.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
+                    price1.setBackgroundResource(R.drawable.btn_background_black);
+
+                    priceEdit.setText("");
+                }
+            }
+        });
+        price2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (price2.isChecked())
+                {allwhite();
+                    price2.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.Yellow));
+                    priceEdit.setText("20,000");price0.setChecked(false);
+                    price1.setChecked(false);
+                    price3.setChecked(false);
+                }
+                else{
+                    price2.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
+                    price2.setBackgroundResource(R.drawable.btn_background_black);
+
+                    priceEdit.setText("");
+                }
+            }
+        });
+        price3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (price3.isChecked())
+                {
+                    allwhite();
+                    price3.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.Yellow));
+                    priceEdit.setText("30,000");
+                    price1.setChecked(false);
+                    price2.setChecked(false);
+                    price0.setChecked(false);
+                }
+                else{
+                    price3.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
+                    price3.setBackgroundResource(R.drawable.btn_background_black);
+
+                    priceEdit.setText("");
+                }
+            }
+        });
         registerButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 get_data();
-                check_ok();
+                if (check_ok())
+                {
+                    int category_id = selectCategoryId();
+                    String sendMessage = "name="+title+"&category="+category_id+"&location="+location+"&datehoure="+datehour+"&datemin="+datemin+"&duehour="+duehour+"&duemin="+duemin+"&limit="+limit+"&price="+price+"&detail="+detail+"&tutor="+tutor+"&date_time="+date_time;
+                    ConnectServer connectserver = new ConnectServer(sendMessage, "ClassRegister.jsp");
+                    String result = null;
+                    try {
+                        result = connectserver.execute().get().toString();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(result.equals("exist    ")) {
+                        Toast.makeText(SignupActivity2.this,"이미 존재하는 아이디입니다.",Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else if(result.equals("ok    ")) {
+                        Log.i("실행여부", "ok");
+                        Toast.makeText(SignupActivity2.this,"회원가입을 축하합니다.",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "모든 사항을 입력해주세요.", Toast.LENGTH_LONG);
+                }
             }
 
         });
 
     }
+    void allwhite()
+    {price0.setBackgroundResource(R.drawable.btn_background_black);
+        price1.setBackgroundResource(R.drawable.btn_background_black);
+        price2.setBackgroundResource(R.drawable.btn_background_black);
+        price3.setBackgroundResource(R.drawable.btn_background_black);
+        price0.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
+        price1.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
+        price2.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
+        price3.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
+    }
+    void show()
+    {
+        final List<String> ListItems = new ArrayList<>();
+        ListItems.add("월");
+        ListItems.add("화");
+        ListItems.add("수");
+        ListItems.add("목");
+        ListItems.add("금");
+        ListItems.add("토");
+        ListItems.add("일");
+        final CharSequence[] items =  ListItems.toArray(new String[ ListItems.size()]);
+
+        final List SelectedItems  = new ArrayList();
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("AlertDialog Title");
+        builder.setMultiChoiceItems(items, null,
+                new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        if (isChecked) {
+                            //사용자가 체크한 경우 리스트에 추가
+                            SelectedItems.add(which);
+                        } else if (SelectedItems.contains(which)) {
+                            //이미 리스트에 들어있던 아이템이면 제거
+                            SelectedItems.remove(Integer.valueOf(which));
+                        }
+                    }
+                });
+        builder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String msg="";
+                        for (int i = 0; i < SelectedItems.size(); i++) {
+                            int index = (int) SelectedItems.get(i);
+                            msg=msg+ListItems.get(index);
+                            if (i != SelectedItems.size()-1) msg+= ",";
+                        }
+                        classWeek.setText("선택 요일 : "+msg);
+                    }
+                });
+        builder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        builder.show();
+    }
+    public void InitializeListener()
+    {
+        callbackMethod = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+            {
+                due_date = year+"-"+monthOfYear+"-"+dayOfMonth;
+                classduedate.setText("마감 날짜 : "+year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+            }
+        };
+    }
+
 
     private int selectCategoryId() {
         if (category.equals("뷰티"))return 1;
@@ -285,21 +500,24 @@ public class ClassaddActivity extends AppCompatActivity {
         country = locationSpinner.getSelectedItem().toString();
     }
     private void get_data() {
+        locationString = locationTextView.getText().toString();
         title = nameEdit.getText().toString();
 
-        duehour = duedate_hourEdit.getText().toString();
-        duemin = duedate_minuateEdit.getText().toString();
         datehour = date_hourEdit.getText().toString();
         datemin = date_minuateEdit.getText().toString();
         limit = limitEdit.getText().toString();
         price = priceEdit.getText().toString();
         detail = detailEdit.getText().toString();
         tutor = tutorEdit.getText().toString();
+        date_time = date_minuateEdit.getText().toString();
         imageuri = "";
     }
 
-    private void check_ok() {
-
+    private boolean check_ok() {
+        if (title.equals("") || duehour.equals("") || duemin.equals("") || datehour.equals("") || limit.equals("") || price.equals("") || detail.equals("") || tutor.equals("") ||locationString.equals("") || date_time.equals(""))
+            return false;
+        else
+            return true;
     }
 
   /*  public void HttpFileUpload(String urlString, String params, String fileName) {
