@@ -126,7 +126,7 @@ public class ImageServer extends AsyncTask<String, Void, String> {
 
                     dos.flush(); // finish upload...
 
-                    if (conn.getResponseCode() == 200) {
+                   /* if (conn.getResponseCode() == 200) {
 
                         InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
 
@@ -141,7 +141,23 @@ public class ImageServer extends AsyncTask<String, Void, String> {
                             stringBuffer.append(line);
 
                         }
+                        receiveMsg = buffer.toString();
+                    }*/
+                    if(conn.getResponseCode() == conn.HTTP_OK) {
+                        InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
+                        BufferedReader reader = new BufferedReader(tmp);
+                        StringBuffer buffer2 = new StringBuffer();
+                        String str2;
 
+                        //jsp에서 보낸 값을 받음
+                        while ((str2 = reader.readLine()) != null) {
+                            buffer2.append(str2);
+                        }
+                        receiveMsg = buffer2.toString();
+                        Log.i("통신 결과", receiveMsg);
+                    } else {
+                        Log.i("통신 결과", conn.getResponseCode()+"에러");
+                        // 통신이 실패했을 때 실패한 이유를 알기 위해 로그를 찍습니다.
                     }
 
                     mFileInputStream.close();
@@ -158,7 +174,7 @@ public class ImageServer extends AsyncTask<String, Void, String> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String result = "";
-        return result;
+        Log.i("이미지 테스트", receiveMsg);
+        return receiveMsg;
     }
 }

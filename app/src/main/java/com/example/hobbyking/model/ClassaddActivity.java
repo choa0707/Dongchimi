@@ -50,13 +50,13 @@ public class ClassaddActivity extends AppCompatActivity {
 
     Button locationButton, dateButton, duedateButton, imageButton, registerButton;
     ToggleButton price0, price1, price2, price3;
-    EditText nameEdit, date_hourEdit, date_minuateEdit, priceEdit, detailEdit, tutorEdit, limitEdit, date_timeEdit;
+    EditText nameEdit, date_hourEdit, date_minuateEdit, priceEdit, detailEdit, tutorEdit, limitEdit, class_timeEdit;
     TextView locationTextView, classWeek, classduedate;
-    String title, category, location, country, duehour, duemin, datehour,datemin, limit,detail, tutor, imageuri, price, locationString, date_time;
+    String title, category, location, country, duehour, duemin, datehour,datemin, limit,detail, tutor, imageuri, price, locationString, date_time, date_week, class_time, location_name;
     Spinner categorySpinner, locationSpinner;
     List<String> locationList ;
     AlertDialog.Builder alertDialogBuilder;
-    String sendMessage, due_date;
+    String sendMessage, due_date, imageUrl;
      CharSequence[] charSequenceItems;
     ImageView image1, image2, image3;
     String imageName;
@@ -67,7 +67,7 @@ public class ClassaddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classadd);
-
+        imageUrl="";
         this.InitializeListener();
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                 .permitDiskReads()
@@ -93,10 +93,12 @@ public class ClassaddActivity extends AppCompatActivity {
         limitEdit = (EditText)findViewById(R.id.classadd_limit);
         nameEdit = (EditText)findViewById(R.id.classadd_name);
         date_hourEdit = (EditText)findViewById(R.id.classadd_date_hour);
+        tutorEdit = (EditText)findViewById(R.id.classadd_tutor);
+        detailEdit = (EditText)findViewById(R.id.classadd_details);
         date_minuateEdit = (EditText)findViewById(R.id.classadd_date_minuate);
         priceEdit = (EditText)findViewById(R.id.classadd_price) ;
         locationTextView = (TextView)findViewById(R.id.classadd_location);
-        date_timeEdit = (EditText)findViewById(R.id.classadd_date_time);
+        class_timeEdit = (EditText)findViewById(R.id.classadd_date_time);
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
         categorySpinner.setAdapter(adapter);
@@ -163,12 +165,14 @@ public class ClassaddActivity extends AppCompatActivity {
                 ConnectServer connectserver = new ConnectServer(sendMessage, "get_location.jsp");
                 try {
                     String result = connectserver.execute().get().toString();
+
                     if (!result.equals("fail    ")){
-                        result = result.replace(" ", "");
                         String[] result_set = result.split("/");
-                        for (int i = 0; i < result_set.length; i++)
+                        int i;
+                        for (i = 1; i < result_set.length; i++)
                         {
                             locationList.add(result_set[i]);
+                            Log.i("24일 장소", result_set[i].toString());
                         }
                        charSequenceItems = locationList.toArray(new CharSequence[locationList.size()]);
                         alertDialogBuilder = new AlertDialog.Builder(ClassaddActivity.this);
@@ -180,6 +184,9 @@ public class ClassaddActivity extends AppCompatActivity {
                                         charSequenceItems[id] + " 선택했습니다.",
                                         Toast.LENGTH_SHORT).show();
                                 location = charSequenceItems[id].toString();
+                                String[] get_locationname = location.split("\"");
+                                location_name = get_locationname[1];
+                                Log.i("24일 장소이름", location_name);
                                 locationTextView.setText(location);
                                 dialog.dismiss();
                             }
@@ -280,10 +287,18 @@ public class ClassaddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 get_data();
+                Log.i("클래스등록서", "테스트1");
                 if (check_ok())
                 {
+                    Log.i("클래스등록서", "테스트");
                     int category_id = selectCategoryId();
-                    String sendMessage = "name="+title+"&category="+category_id+"&location="+location+"&datehoure="+datehour+"&datemin="+datemin+"&duehour="+duehour+"&duemin="+duemin+"&limit="+limit+"&price="+price+"&detail="+detail+"&tutor="+tutor+"&date_time="+date_time;
+                    Log.i("클래스등록서", sendMessage);
+                    imageUrl = imageUrl.replace(" ","");
+                    Log.i("마지막 이미지", imageUrl);
+                    String sendMessage = "name="+title+"&category="+category_id+"&location="+location_name+"&duedate="+due_date+"&datehoure="+datehour +"&datemin="
+                            +datemin+"&limit="+limit+"&price="+price+"&detail="+detail+"&tutor="+tutor+"&date_time="+date_time+"&date_week="+date_week+
+                            "&class_time="+class_time+"&image="+imageUrl;
+                    Log.i("클래스등록서", sendMessage);
                     ConnectServer connectserver = new ConnectServer(sendMessage, "ClassRegister.jsp");
                     String result = null;
                     try {
@@ -294,17 +309,18 @@ public class ClassaddActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    if(result.equals("exist    ")) {
-                        Toast.makeText(SignupActivity2.this,"이미 존재하는 아이디입니다.",Toast.LENGTH_SHORT).show();
+                    if(result.equals("success    ")) {
+                        Toast.makeText(getApplicationContext(),"수업이 추가되었습니다.",Toast.LENGTH_SHORT).show();
                         finish();
-                    } else if(result.equals("ok    ")) {
-                        Log.i("실행여부", "ok");
-                        Toast.makeText(SignupActivity2.this,"회원가입을 축하합니다.",Toast.LENGTH_SHORT).show();
+                    } else if(result.equals("fail    ")) {
+
+                        Toast.makeText(getApplicationContext(),"실패하였습니다.",Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "모든 사항을 입력해주세요.", Toast.LENGTH_LONG);
+                    if (imageUrl.equals("")) Toast.makeText(getApplicationContext(), "이미지를 추가해주세요.", Toast.LENGTH_LONG).show();
+                    else Toast.makeText(getApplicationContext(), "모든 사항을 입력해주세요.", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -356,10 +372,22 @@ public class ClassaddActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String msg="";
+                        date_week = "";
                         for (int i = 0; i < SelectedItems.size(); i++) {
                             int index = (int) SelectedItems.get(i);
                             msg=msg+ListItems.get(index);
-                            if (i != SelectedItems.size()-1) msg+= ",";
+                            if (ListItems.get(index).equals("월")) date_week += 1;
+                            else if (ListItems.get(index).equals("화")) date_week += 2;
+                            else if (ListItems.get(index).equals("수")) date_week += 3;
+                            else if (ListItems.get(index).equals("목")) date_week += 4;
+                            else if (ListItems.get(index).equals("금")) date_week += 5;
+                            else if (ListItems.get(index).equals("토")) date_week += 6;
+                            else if (ListItems.get(index).equals("일")) date_week += 7;
+                            if (i != SelectedItems.size()-1)
+                            {
+                                msg+= ",";
+                                date_week += ",";
+                            }
                         }
                         classWeek.setText("선택 요일 : "+msg);
                     }
@@ -474,19 +502,21 @@ public class ClassaddActivity extends AppCompatActivity {
     }
 
     public void DoFileUpload(String apiUrl, String absolutePath) {
+        String result="";
         Log.i("이미지 테스트 ", "1");
         int uid;
         SharedPreferences autoLogin = getSharedPreferences("auto", Context.MODE_PRIVATE);
         uid = autoLogin.getInt("UID", 0);
         ImageServer imageServer = new ImageServer(absolutePath, "get_image.jsp", absolutePath, uid);
         try{
-            String result = imageServer.execute().get().toString();
+            result = imageServer.execute().get().toString();
             Log.i("이미지 서버", "성공");
         }catch (Exception e)
         {
             Log.i("이미지 서버", "실패");
         }
-
+        imageUrl = result;
+        Log.i("이미지 테스트", result);
        // HttpFileUpload(apiUrl, "", absolutePath);
 
     }
@@ -502,22 +532,24 @@ public class ClassaddActivity extends AppCompatActivity {
     private void get_data() {
         locationString = locationTextView.getText().toString();
         title = nameEdit.getText().toString();
-
         datehour = date_hourEdit.getText().toString();
         datemin = date_minuateEdit.getText().toString();
         limit = limitEdit.getText().toString();
         price = priceEdit.getText().toString();
         detail = detailEdit.getText().toString();
         tutor = tutorEdit.getText().toString();
-        date_time = date_minuateEdit.getText().toString();
+        class_time = class_timeEdit.getText().toString();
         imageuri = "";
+        date_time = datehour+","+datemin;
     }
 
     private boolean check_ok() {
-        if (title.equals("") || duehour.equals("") || duemin.equals("") || datehour.equals("") || limit.equals("") || price.equals("") || detail.equals("") || tutor.equals("") ||locationString.equals("") || date_time.equals(""))
+        if (title==null || datehour==null || datemin==null || limit==null || price==null || detail==null ||
+                tutor==null ||locationString==null || date_time==null || class_time==null || imageUrl.equals(""))
             return false;
-        else
+        else {
             return true;
+        }
     }
 
   /*  public void HttpFileUpload(String urlString, String params, String fileName) {
