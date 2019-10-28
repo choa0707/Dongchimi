@@ -2,28 +2,21 @@ package com.example.hobbyking.model;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.hobbyking.R;
 
-public class HomeViewpagerAdapter extends PagerAdapter {
+public class HomeViewpagerAdapter3 extends PagerAdapter {
     private int[] images = {R.drawable.i1, R.drawable.i1, R.drawable.i1};
     private LayoutInflater inflater;
     private Context context;
 
-
-
-
-    public HomeViewpagerAdapter(Context context){
+    public HomeViewpagerAdapter3(Context context){
         this.context = context;
     }
     @Override

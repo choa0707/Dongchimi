@@ -109,7 +109,7 @@ public class SignupActivity2 extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
                 startActivity(intent);
                 SignupActivity signupActivity = (SignupActivity) SignupActivity.SignupActivity;
                 signupActivity.finish();

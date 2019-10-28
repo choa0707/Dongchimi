@@ -8,33 +8,34 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.hobbyking.R;
 import com.example.hobbyking.model.CircleAnimIndicator;
-import com.example.hobbyking.model.HomeViewpagerAdapter;
+import com.example.hobbyking.model.HomeViewpagerAdapter1;
 
 public class HomeFragment extends Fragment {
     View fragment;
-    HomeViewpagerAdapter adapter;
+    HomeViewpagerAdapter1 adapter1;
+    HomeViewpagerAdapter1 adapter2;
+    HomeViewpagerAdapter1 adapter3;
     ViewPager viewPager1,viewPager2,viewPager3;
     private CircleAnimIndicator circleAnimIndicator,circleAnimIndicator2,circleAnimIndicator3;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         fragment = inflater.inflate(R.layout.fragment_home, container, false);
 
         viewPager1 = (ViewPager)fragment.findViewById(R.id.view1);
         viewPager2 = (ViewPager)fragment.findViewById(R.id.view2);
         viewPager3 = (ViewPager)fragment.findViewById(R.id.view3);
-        adapter = new HomeViewpagerAdapter(fragment.getContext());
+        adapter1 = new HomeViewpagerAdapter1(fragment.getContext());
 
 
-        viewPager1.setAdapter(adapter);
-        viewPager2.setAdapter(adapter);
-        viewPager3.setAdapter(adapter);
+        viewPager1.setAdapter(adapter1);
+        viewPager2.setAdapter(adapter2);
+        viewPager3.setAdapter(adapter3);
         viewPager1.addOnPageChangeListener(mOnPageChangeListener1);
         viewPager2.addOnPageChangeListener(mOnPageChangeListener2);
         viewPager3.addOnPageChangeListener(mOnPageChangeListener3);
