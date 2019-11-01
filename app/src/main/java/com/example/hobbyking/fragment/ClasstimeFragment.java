@@ -9,9 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hobbyking.R;
+import com.example.hobbyking.data.ClassData;
 
 public class ClasstimeFragment extends Fragment {
+
+    ClassData classData;
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_classtime, container, false);
     }
+
+
 }

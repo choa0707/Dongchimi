@@ -32,8 +32,8 @@ public class HomeViewpagerAdapter2 extends PagerAdapter {
         inflater = (LayoutInflater)context.getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.slider, container, false);
-        ImageView imageView = (ImageView)v.findViewById(R.id.home_imageview);
-        imageView.setImageResource(images[position]);
+        //ImageView imageView = (ImageView)v.findViewById(R.id.home_imageview);
+        //imageView.setImageResource(images[position]);
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override

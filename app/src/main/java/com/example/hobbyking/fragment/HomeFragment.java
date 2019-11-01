@@ -9,11 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.example.hobbyking.R;
 import com.example.hobbyking.model.CircleAnimIndicator;
 import com.example.hobbyking.model.HomeViewpagerAdapter1;
 
 public class HomeFragment extends Fragment {
+    private RequestQueue mQueue;
+
     View fragment;
     HomeViewpagerAdapter1 adapter1;
     HomeViewpagerAdapter1 adapter2;
@@ -26,7 +30,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         fragment = inflater.inflate(R.layout.fragment_home, container, false);
-
+        mQueue = Volley.newRequestQueue(fragment.getContext());
         viewPager1 = (ViewPager)fragment.findViewById(R.id.view1);
         viewPager2 = (ViewPager)fragment.findViewById(R.id.view2);
         viewPager3 = (ViewPager)fragment.findViewById(R.id.view3);

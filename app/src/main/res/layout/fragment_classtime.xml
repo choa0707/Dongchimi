@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 <TextView
+    android:id="@+id/detail_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="장소 : 신촌역 윙 스터디카페, 시간 : 15:00~18:00"

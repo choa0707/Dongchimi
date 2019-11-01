@@ -1,6 +1,9 @@
 package com.example.hobbyking.model;
 
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.hobbyking.R;
+import com.example.hobbyking.data.ClassData;
 import com.example.hobbyking.fragment.ClassinfoFragment;
 import com.example.hobbyking.fragment.ClassreviewFragment;
 import com.example.hobbyking.fragment.ClasstimeFragment;
@@ -17,13 +21,18 @@ import java.util.List;
 
 public class ClassdetailActivity extends AppCompatActivity {
 
+
+    private ClassData classData;
     CustomSwipeAdapter adapter;
     ViewPager viewPager;
     private CircleAnimIndicator circleAnimIndicator;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classdetail);
+        classData = (ClassData)getIntent().getSerializableExtra("ClassData");
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         adapter = new CustomSwipeAdapter(this);
         viewPager.setAdapter(adapter);
@@ -38,11 +47,17 @@ public class ClassdetailActivity extends AppCompatActivity {
         Button button_classtime = (Button)findViewById(R.id.classTime);
         Button button_classreview = (Button)findViewById(R.id.classReview);
 
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("classdata", classData);
+
         button_classinfo.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.classFrame, new ClassinfoFragment()).commit();
+                ClassinfoFragment classinfoFragment = new ClassinfoFragment();
+                classinfoFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.classFrame, classinfoFragment).commit();
+
             }
         });
 

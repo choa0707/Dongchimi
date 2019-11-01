@@ -5,6 +5,7 @@
 
     >
     <TextView
+        android:id="@+id/detail_class"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="영어 회화 실력 향상을 위한 오픽 스터디"
