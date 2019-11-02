@@ -47,15 +47,15 @@ public class MypageTutorRegisterActivity extends AppCompatActivity {
                 s_account = account.getText().toString();
                 full_account = bank+","+s_account;
                 if (bank.equals("")) {
-                    Toast.makeText(getApplicationContext(), "은행을 선택해주세요.", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "은행을 선택해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else if (phonenumber.equals(""))
                 {
-                    Toast.makeText(getApplicationContext(), "핸드폰 번호를 입력해주세요.", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "핸드폰 번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else if (s_account.equals(""))
                 {
-                    Toast.makeText(getApplicationContext(), "계좌번호를 입력해주세요.", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "계좌번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -68,7 +68,7 @@ public class MypageTutorRegisterActivity extends AppCompatActivity {
                         Log.i("튜터등록", result);
                         if (result.equals("ok    "))
                         {
-                            Toast.makeText(getApplicationContext(), "튜터로 등록되었습니다.", Toast.LENGTH_LONG);
+                            Toast.makeText(getApplicationContext(), "튜터로 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             SharedPreferences.Editor autoEditor = autoLogin.edit();
                             autoEditor.putInt("TUTOR", 1);
                             autoEditor.commit();

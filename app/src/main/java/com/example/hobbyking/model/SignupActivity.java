@@ -62,7 +62,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (!pwdcheck.getText().toString().equals(pwd.getText().toString()))
                 {
-                    Toast.makeText(getApplicationContext(), "비밀번호를 확인해주세요.", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
                     pwdcheck.setText("");
                     pwd.setText("");
                 }

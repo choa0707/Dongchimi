@@ -201,7 +201,7 @@ public class ClassaddActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), "해당하는 장소가 없습니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "해당하는 장소가 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -323,8 +323,8 @@ public class ClassaddActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    if (imageUrl.equals("")) Toast.makeText(getApplicationContext(), "이미지를 추가해주세요.", Toast.LENGTH_LONG).show();
-                    else Toast.makeText(getApplicationContext(), "모든 사항을 입력해주세요.", Toast.LENGTH_LONG).show();
+                    if (imageUrl.equals("")) Toast.makeText(getApplicationContext(), "이미지를 추가해주세요.", Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(getApplicationContext(), "모든 사항을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -130,11 +130,11 @@ NetworkImageView mNetworkImageView;
             public void onClick(View v) {
                 if (fail == 1)
                 {
-                    Toast.makeText(getApplicationContext(), "수강 인원이 가득찼습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "수강 인원이 가득찼습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else if (over == 1)
                 {
-                    Toast.makeText(getApplicationContext(), "수강신청 기간이 지났습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "수강신청 기간이 지났습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -302,12 +302,12 @@ NetworkImageView mNetworkImageView;
 
             if (result.equals("success    "))
             {
-                Toast.makeText(getApplicationContext(), "수강신청이 완료 되었습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "수강신청이 완료 되었습니다.", Toast.LENGTH_SHORT).show();
                 classData.setPeople_num(classData.getPeople_num()+1);
-            }else if (result.equals("fail    "))Toast.makeText(getApplicationContext(), "이미 신청한 클래스입니다.", Toast.LENGTH_LONG).show();
+            }else if (result.equals("fail    "))Toast.makeText(getApplicationContext(), "이미 신청한 클래스입니다.", Toast.LENGTH_SHORT).show();
             else
             {
-                Toast.makeText(getApplicationContext(), "서버문제로 수강신청에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "서버문제로 수강신청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
             }
         } catch (ExecutionException e) {
             e.printStackTrace();
