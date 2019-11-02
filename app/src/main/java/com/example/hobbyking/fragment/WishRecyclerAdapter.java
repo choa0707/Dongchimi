@@ -1,5 +1,6 @@
 package com.example.hobbyking.fragment;
 
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hobbyking.R;
+import com.example.hobbyking.model.ClassdetailActivity;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,15 @@ public class WishRecyclerAdapter extends RecyclerView.Adapter<WishRecyclerAdapte
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.wish_list_item, parent, false);
+        view.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ClassdetailActivity.class);
+                //intent.putExtra("ClassData", classData[position]);
+                v.getContext().startActivity(intent);
+            }
+        });
         return new ItemViewHolder(view);
     }
 

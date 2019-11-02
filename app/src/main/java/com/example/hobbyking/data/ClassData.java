@@ -3,9 +3,11 @@ package com.example.hobbyking.data;
 import java.io.Serializable;
 
 public class ClassData implements Serializable {
+    int classid;
     String name;
     String detail;
     String tutor_info;
+    int tutor_id;
     int price;
     String image_url;
     double rating;
@@ -18,7 +20,11 @@ public class ClassData implements Serializable {
     public ClassData() {
     }
 
-    public ClassData(String name, String detail, String tutor_info, int price, String image_url, double rating, int people_num, String duedate, int limit_people_num, String date_time, String date_week, int class_time) {
+
+
+    public ClassData(String name, String detail, String tutor_info, int price, String image_url, double rating, int people_num, String duedate, int limit_people_num, String date_time, String date_week, int class_time, int class_id, int tutor_id) {
+        this.classid = class_id;
+        this.tutor_id = tutor_id;
         this.name = name;
         this.detail = detail;
         this.tutor_info = tutor_info;
@@ -36,9 +42,12 @@ public class ClassData implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
+    public void setTutor_id(int tutor_id){this.tutor_id = tutor_id;}
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+    public void setClassid(String detail) {
+        this.classid = classid;
     }
 
     public void setTutor_info(String tutor_info) {
@@ -96,7 +105,10 @@ public class ClassData implements Serializable {
     public int getPrice() {
         return price;
     }
-
+    public int getTutor_id() {return  tutor_id;}
+    public int getClassid() {
+        return classid;
+    }
     public String getImage_url() {
         return image_url;
     }

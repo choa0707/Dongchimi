@@ -14,14 +14,16 @@ import com.android.volley.toolbox.Volley;
 import com.example.hobbyking.R;
 import com.example.hobbyking.model.CircleAnimIndicator;
 import com.example.hobbyking.model.HomeViewpagerAdapter1;
+import com.example.hobbyking.model.HomeViewpagerAdapter2;
+import com.example.hobbyking.model.HomeViewpagerAdapter3;
 
 public class HomeFragment extends Fragment {
     private RequestQueue mQueue;
 
     View fragment;
     HomeViewpagerAdapter1 adapter1;
-    HomeViewpagerAdapter1 adapter2;
-    HomeViewpagerAdapter1 adapter3;
+    HomeViewpagerAdapter2 adapter2;
+    HomeViewpagerAdapter3 adapter3;
     ViewPager viewPager1,viewPager2,viewPager3;
     private CircleAnimIndicator circleAnimIndicator,circleAnimIndicator2,circleAnimIndicator3;
 
@@ -35,6 +37,8 @@ public class HomeFragment extends Fragment {
         viewPager2 = (ViewPager)fragment.findViewById(R.id.view2);
         viewPager3 = (ViewPager)fragment.findViewById(R.id.view3);
         adapter1 = new HomeViewpagerAdapter1(fragment.getContext());
+        adapter2 = new HomeViewpagerAdapter2(fragment.getContext());
+        adapter3 = new HomeViewpagerAdapter3(fragment.getContext());
 
 
         viewPager1.setAdapter(adapter1);

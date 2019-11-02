@@ -47,6 +47,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ClassaddActivity extends AppCompatActivity {
+    int uid;
+
 
     Button locationButton, dateButton, duedateButton, imageButton, registerButton;
     ToggleButton price0, price1, price2, price3;
@@ -67,6 +69,8 @@ public class ClassaddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classadd);
+        SharedPreferences autoLogin = this.getSharedPreferences("auto", Context.MODE_PRIVATE);
+        uid = autoLogin.getInt("UID", 0);
         imageUrl="";
         this.InitializeListener();
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -297,7 +301,7 @@ public class ClassaddActivity extends AppCompatActivity {
                     Log.i("마지막 이미지", imageUrl);
                     String sendMessage = "name="+title+"&category="+category_id+"&location="+location_name+"&duedate="+due_date+"&datehoure="+datehour +"&datemin="
                             +datemin+"&limit="+limit+"&price="+price+"&detail="+detail+"&tutor="+tutor+"&date_time="+date_time+"&date_week="+date_week+
-                            "&class_time="+class_time+"&image="+imageUrl;
+                            "&class_time="+class_time+"&image="+imageUrl+"&tutorid="+uid;
                     Log.i("클래스등록서", sendMessage);
                     ConnectServer connectserver = new ConnectServer(sendMessage, "ClassRegister.jsp");
                     String result = null;
@@ -407,8 +411,8 @@ public class ClassaddActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
             {
-                due_date = year+"-"+monthOfYear+"-"+dayOfMonth;
-                classduedate.setText("마감 날짜 : "+year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+                due_date = year+"-"+monthOfYear+1+"-"+dayOfMonth;
+                classduedate.setText("마감 날짜 : "+year + "년" + monthOfYear+1 + "월" + dayOfMonth + "일");
             }
         };
     }
@@ -504,9 +508,7 @@ public class ClassaddActivity extends AppCompatActivity {
     public void DoFileUpload(String apiUrl, String absolutePath) {
         String result="";
         Log.i("이미지 테스트 ", "1");
-        int uid;
-        SharedPreferences autoLogin = getSharedPreferences("auto", Context.MODE_PRIVATE);
-        uid = autoLogin.getInt("UID", 0);
+
         ImageServer imageServer = new ImageServer(absolutePath, "get_image.jsp", absolutePath, uid);
         try{
             result = imageServer.execute().get().toString();
@@ -544,8 +546,9 @@ public class ClassaddActivity extends AppCompatActivity {
     }
 
     private boolean check_ok() {
-        if (title==null || datehour==null || datemin==null || limit==null || price==null || detail==null ||
-                tutor==null ||locationString==null || date_time==null || class_time==null || imageUrl.equals(""))
+        if (title==null ||title.equals("") || datehour==null ||datehour.equals("") || datemin==null ||datemin.equals("")|| limit==null||limit.equals("") || price==null
+                || price.equals("")|| detail.equals("")||
+                tutor.equals("") ||locationString==null || locationString.equals("")|| date_time==null ||date_time.equals("")|| class_time==null || imageUrl.equals(""))
             return false;
         else {
             return true;
