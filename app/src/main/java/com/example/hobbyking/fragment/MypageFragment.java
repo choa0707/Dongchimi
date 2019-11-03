@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,13 @@ import com.example.hobbyking.model.MypageClasslistActivity;
 import com.example.hobbyking.model.MypageMyinfoActivity;
 import com.example.hobbyking.model.MypageTutorRegisterActivity;
 import com.example.hobbyking.model.SplashActivity;
+import com.example.hobbyking.model.TutorClasslistActivity;
 
 public class MypageFragment extends Fragment {
 
     View fragment;
     Button classadd, myinfo, classlist, logout, tutor;
+    Button tclasslist;
 
     @Nullable
     @Override
@@ -35,6 +38,7 @@ public class MypageFragment extends Fragment {
         myinfo = (Button)fragment.findViewById(R.id.mypage_myinfo);
         logout =(Button)fragment.findViewById(R.id.mypage_logout);
         classlist = (Button)fragment.findViewById(R.id.mypage_classlist);
+
         tutor = (Button)fragment.findViewById(R.id.mypage_tutor_register);
 
 
@@ -52,6 +56,8 @@ public class MypageFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
         classlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +65,7 @@ public class MypageFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         logout.setOnClickListener(new View.OnClickListener(){
             @Override

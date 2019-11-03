@@ -4,40 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="1dp"
+    android:layout_height="280dp"
+    android:paddingBottom="30dp"
     >
-
-    <ImageView
+    <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/wish_image"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:src="@mipmap/ic_launcher"
-        />
 
-    <LinearLayout
-        android:id="@+id/wish_linear"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        >
+        android:layout_height="0dp"
+        android:layout_weight="2000"
+        android:layout_centerHorizontal="true"
+        android:background="#000000"/>
+
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:id="@+id/wish_tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="lutti"/>
+            android:textSize="22dp"
+            android:layout_marginLeft="10dp"
 
+            android:layout_marginTop="10dp"
+            android:text="영어회화 스터디"/>
         <TextView
-            android:id="@+id/wish_tv2"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            tools:text="one"
-            />
+            android:id="@+id/wish_tv2"
 
-    </LinearLayout>
+            android:layout_gravity="right"
+            android:textSize="15dp"
+            android:text="30,000원"/>
+
+
 
 
 </LinearLayout>

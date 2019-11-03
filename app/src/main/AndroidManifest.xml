@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".model.TuteeListActivity"></activity>
+        <activity android:name=".model.TutorClasslistActivity" />
         <activity android:name=".model.MypageTutorRegisterActivity" />
         <activity android:name=".model.LoginActivity" />
         <activity android:name=".model.SignupActivity2" />
@@ -28,9 +30,9 @@
         </activity>
         <activity android:name=".model.MainActivity" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

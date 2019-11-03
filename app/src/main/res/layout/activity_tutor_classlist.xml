@@ -30,14 +30,14 @@
                     app:layout_constraintBottom_toBottomOf="@+id/category_cate_2_divider"
                     android:layout_width="25dp" android:layout_height="25dp"
                     />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
-                    android:paddingLeft="120dp"
+                    android:paddingLeft="100dp"
                     android:layout_gravity="center"
-
-                    android:text="수강목록"
+                    android:text="진행중인 클래스"
+                    android:textSize="20dp"
 
                     />
 
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_myclass"
+                    android:id="@+id/rv_tutorclass"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintLeft_toLeftOf="parent"

@@ -100,6 +100,7 @@ public class HomeViewpagerAdapter2 extends PagerAdapter {
         //ImageView imageView = (ImageView)v.findViewById(R.id.home_imageview);
         priceText =(TextView)v.findViewById(R.id.homefragment_price);
         mNetworkImageView = (NetworkImageView)v.findViewById(R.id.networkImageView);
+
         LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+classData[position].getImage_url();
         Log.i("이미지주소", LOGIN_REQUEST_URL);
         mNetworkImageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,14 @@ import com.example.hobbyking.R;
 import com.example.hobbyking.model.ClassaddActivity;
 import com.example.hobbyking.model.MypageClasslistActivity;
 import com.example.hobbyking.model.MypageMyinfoActivity;
+import com.example.hobbyking.model.MypageTutorRegisterActivity;
 import com.example.hobbyking.model.SplashActivity;
+import com.example.hobbyking.model.TutorClasslistActivity;
 
 public class MypageFragmentTutor extends Fragment {
     View fragment;
-    Button classadd, myinfo, classlist, logout;
+    Button classadd, myinfo, classlist, logout, tutor;
+    Button tclasslist;
 
     @Nullable
     @Override
@@ -31,17 +35,13 @@ public class MypageFragmentTutor extends Fragment {
 
         fragment = inflater.inflate(R.layout.fragment_mypage_tutor, container, false);
 
-        classadd = (Button)fragment.findViewById(R.id.mypage_classadd);
         myinfo = (Button)fragment.findViewById(R.id.mypage_myinfo);
         logout =(Button)fragment.findViewById(R.id.mypage_logout);
         classlist = (Button)fragment.findViewById(R.id.mypage_classlist);
-        classadd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ClassaddActivity.class);
-                startActivity(intent);
-            }
-        });
+        tclasslist=(Button)fragment.findViewById(R.id.mypage_classlist_tutor);
+
+
+
         myinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +49,16 @@ public class MypageFragmentTutor extends Fragment {
                 startActivity(intent);
             }
         });
+        tclasslist.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), TutorClasslistActivity.class);
+                startActivity(intent);
+            }
+        });
+
         classlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +66,7 @@ public class MypageFragmentTutor extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         logout.setOnClickListener(new View.OnClickListener(){
             @Override

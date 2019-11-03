@@ -7,6 +7,7 @@ public class ClassData implements Serializable {
     String name;
     String detail;
     String tutor_info;
+    int state;
     int tutor_id;
     int price;
     String image_url;
@@ -38,7 +39,9 @@ public class ClassData implements Serializable {
         this.date_week = date_week;
         this.class_time = class_time;
     }
-
+    public void setState(int state) {
+        this.state = state;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -113,10 +116,12 @@ public class ClassData implements Serializable {
         return image_url;
     }
 
+    public int getState() {
+        return state;
+    }
     public double getRating() {
         return rating;
     }
-
     public int getPeople_num() {
         return people_num;
     }

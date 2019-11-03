@@ -18,26 +18,26 @@ import com.example.hobbyking.server.ConnectServer;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class MypageClasslistActivity extends AppCompatActivity {
-    private RecyclerView myClassRecyclerView;
+public class TutorClasslistActivity extends AppCompatActivity {
+    private RecyclerView tutorClassRecyclerView;
     private ArrayList<ClassData> classData = new ArrayList<>();
     private int uid;
-    private MyClassAdapter myclassAdapter;
+    private TutorClassAdapter tutorClassAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mypage_classlist);
+        setContentView(R.layout.activity_tutor_classlist);
         SharedPreferences autoLogin = getSharedPreferences("auto", Context.MODE_PRIVATE);
         uid = autoLogin.getInt("UID", 0);
         classData.clear();
 
-        myClassRecyclerView = findViewById(R.id.rv_myclass);
-        myclassAdapter = new MyClassAdapter(classData, getApplicationContext());
+        tutorClassRecyclerView = findViewById(R.id.rv_tutorclass);
+        tutorClassAdapter = new TutorClassAdapter(classData, getApplicationContext());
 
-        RecyclerView.LayoutManager wishLayoutManager = new LinearLayoutManager(getApplicationContext());
-        myClassRecyclerView.setLayoutManager(wishLayoutManager);
-        myClassRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        myClassRecyclerView.setAdapter(myclassAdapter);
+        RecyclerView.LayoutManager tutorLayoutManager = new LinearLayoutManager(getApplicationContext());
+        tutorClassRecyclerView.setLayoutManager(tutorLayoutManager);
+        tutorClassRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        tutorClassRecyclerView.setAdapter(tutorClassAdapter);
     }
 
 }
