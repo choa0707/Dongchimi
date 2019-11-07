@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ClassdetailActivity extends AppCompatActivity {
-    private static final String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
+    private static final String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
     TextView classname, classprice;
     private ClassData classData;
     Button class_apply_button;

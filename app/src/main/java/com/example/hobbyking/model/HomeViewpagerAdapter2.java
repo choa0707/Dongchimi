@@ -43,7 +43,7 @@ public class HomeViewpagerAdapter2 extends PagerAdapter {
     private NetworkImageView mNetworkImageView;
     private ImageLoader mImageLoader;
     ClassData classData[] = new ClassData[4];
-    private String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
+    private String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
     int uid;
     private LayoutInflater inflater;
     private Context context;
@@ -101,7 +101,7 @@ public class HomeViewpagerAdapter2 extends PagerAdapter {
         priceText =(TextView)v.findViewById(R.id.homefragment_price);
         mNetworkImageView = (NetworkImageView)v.findViewById(R.id.networkImageView);
 
-        LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+classData[position].getImage_url();
+        LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/"+classData[position].getImage_url();
         Log.i("이미지주소", LOGIN_REQUEST_URL);
         mNetworkImageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         priceText.setText(Integer.toString(classData[position].getPrice())+"원/회당");

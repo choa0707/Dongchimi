@@ -16,7 +16,7 @@ public class ImageDownActivity extends AsyncTask<String, Void, String> {
 
     public ImageDownActivity(String sendMsg, String serverUrl) {
         this.sendMsg = sendMsg;
-        this.serverUrl = "http://192.168.56.1:8080/HobbyKing/"+serverUrl;
+        this.serverUrl = "http://115.23.171.192:2180/HobbyKing/"+serverUrl;
     }
     @Override
     // doInBackground의 매개값이 문자열 배열. 보낼 값이 여러개일 경우를 위해 배열로.

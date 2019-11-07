@@ -30,7 +30,7 @@ public class WishRecyclerAdapter extends RecyclerView.Adapter<WishRecyclerAdapte
     private ArrayList<ClassData> listData = new ArrayList<>();
     private int uid;
     private ImageLoader mImageLoader;
-    private String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
+    private String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
     public WishRecyclerAdapter(ArrayList<ClassData> myData, Context context){
         this.listData = myData;
         SharedPreferences autoLogin = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
@@ -118,7 +118,7 @@ public class WishRecyclerAdapter extends RecyclerView.Adapter<WishRecyclerAdapte
             textView1.setText(data.getName());
             textView2.setText(data.getPrice()+"원/회당");
             imageView.setImageResource(R.drawable.noimage);
-            LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+data.getImage_url();
+            LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/"+data.getImage_url();
             Log.i("이미지주소", LOGIN_REQUEST_URL);
             imageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         }

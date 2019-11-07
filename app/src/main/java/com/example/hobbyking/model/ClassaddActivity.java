@@ -524,7 +524,7 @@ public class ClassaddActivity extends AppCompatActivity {
         Toast.makeText(ClassaddActivity.this, "이미지 이름 : " + imgName, Toast.LENGTH_SHORT).show();
         this.imageName = imgName;
 
-        DoFileUpload("http://192.168.56.1:8080/HobbyKing/get_image.jsp", imgPath);  //해당 함수를 통해 이미지 전송.
+        DoFileUpload("http://115.23.171.192:2180/HobbyKing/get_image.jsp", imgPath);  //해당 함수를 통해 이미지 전송.
 
         return imgPath;
     }
