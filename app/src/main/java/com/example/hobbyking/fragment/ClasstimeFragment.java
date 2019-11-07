@@ -48,19 +48,8 @@ public class ClasstimeFragment extends Fragment {
             hour += Integer.parseInt(datetime[0]);
             minuate  += Integer.parseInt(datetime[1]);
             datetime_s += " ~ "+ Integer.toString(hour) + "시 "+ minuate + "분 까지";
-            dateweek = classData.getDate_week().split(",");
-            for (int i = 0; i < dateweek.length; i++)
-            {
-                if (Integer.parseInt(dateweek[i]) == 1)dateweek_s += "월";
-                else if (Integer.parseInt(dateweek[i]) == 2)dateweek_s += "화";
-                else if (Integer.parseInt(dateweek[i]) == 3)dateweek_s += "수";
-                else if (Integer.parseInt(dateweek[i]) == 4)dateweek_s += "목";
-                else if (Integer.parseInt(dateweek[i]) == 5)dateweek_s += "금";
-                else if (Integer.parseInt(dateweek[i]) == 6)dateweek_s += "토";
-                else if (Integer.parseInt(dateweek[i]) == 7)dateweek_s += "일";
-                if (i != dateweek.length-1) dateweek_s += ", ";
-            }
-            classtime.setText("진행장소: "+result+"\n"+"진행 요일: "+dateweek_s+"\n"+"진행시간: "+datetime_s);
+
+            classtime.setText("진행장소: "+result+"\n"+"진행 날짜: "+classData.getDate_week()+"\n"+"진행시간: "+datetime_s);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

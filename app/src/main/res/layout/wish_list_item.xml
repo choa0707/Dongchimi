@@ -10,7 +10,7 @@
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/wish_image"
         android:layout_width="match_parent"
-
+        android:scaleType="fitXY"
         android:layout_height="0dp"
         android:layout_weight="2000"
         android:layout_centerHorizontal="true"

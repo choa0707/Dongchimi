@@ -35,12 +35,20 @@ public class MypageFragmentTutor extends Fragment {
 
         fragment = inflater.inflate(R.layout.fragment_mypage_tutor, container, false);
 
+        classadd = (Button)fragment.findViewById(R.id.mypage_classadd) ;
         myinfo = (Button)fragment.findViewById(R.id.mypage_myinfo);
         logout =(Button)fragment.findViewById(R.id.mypage_logout);
         classlist = (Button)fragment.findViewById(R.id.mypage_classlist);
         tclasslist=(Button)fragment.findViewById(R.id.mypage_classlist_tutor);
 
+        classadd.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ClassaddActivity.class);
+                startActivity(intent);
+            }
+        });
 
         myinfo.setOnClickListener(new View.OnClickListener() {
             @Override

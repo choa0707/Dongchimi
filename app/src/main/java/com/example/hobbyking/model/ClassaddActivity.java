@@ -43,13 +43,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ClassaddActivity extends AppCompatActivity {
     int uid;
 
+    int d_year , d_month,d_day;
 
+    int du_year, du_month, du_day;
     Button locationButton, dateButton, duedateButton, imageButton, registerButton;
     ToggleButton price0, price1, price2, price3;
     EditText nameEdit, date_hourEdit, date_minuateEdit, priceEdit, detailEdit, tutorEdit, limitEdit, class_timeEdit;
@@ -58,17 +61,20 @@ public class ClassaddActivity extends AppCompatActivity {
     Spinner categorySpinner, locationSpinner;
     List<String> locationList ;
     AlertDialog.Builder alertDialogBuilder;
-    String sendMessage, due_date, imageUrl;
+    String sendMessage, due_date, imageUrl, real_date;
      CharSequence[] charSequenceItems;
     ImageView image1, image2, image3;
     String imageName;
     String img_path;
-    private DatePickerDialog.OnDateSetListener callbackMethod;
+    private DatePickerDialog.OnDateSetListener callbackMethod1, callbackMethod2;
     final int PICTURE_REQUEST_CODE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classadd);
+        d_year = du_year = Calendar.getInstance().get(Calendar.YEAR);
+        d_month = du_month = Calendar.getInstance().get(Calendar.MONTH);
+        d_day = du_day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         SharedPreferences autoLogin = this.getSharedPreferences("auto", Context.MODE_PRIVATE);
         uid = autoLogin.getInt("UID", 0);
         imageUrl="";
@@ -116,7 +122,8 @@ public class ClassaddActivity extends AppCompatActivity {
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                show();
+                DatePickerDialog dialog = new DatePickerDialog(ClassaddActivity.this, callbackMethod2, d_year, d_month, d_day);
+                dialog.show();
             }
         });
         priceEdit.addTextChangedListener(new TextWatcher() {
@@ -139,7 +146,7 @@ public class ClassaddActivity extends AppCompatActivity {
         duedateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(ClassaddActivity.this, callbackMethod, 2019, 5, 24);
+                DatePickerDialog dialog = new DatePickerDialog(ClassaddActivity.this, callbackMethod1, du_year, du_month, du_day);
                 dialog.show();
             }
         });
@@ -300,7 +307,7 @@ public class ClassaddActivity extends AppCompatActivity {
                     imageUrl = imageUrl.replace(" ","");
                     Log.i("마지막 이미지", imageUrl);
                     String sendMessage = "name="+title+"&category="+category_id+"&location="+location_name+"&duedate="+due_date+"&datehoure="+datehour +"&datemin="
-                            +datemin+"&limit="+limit+"&price="+price+"&detail="+detail+"&tutor="+tutor+"&date_time="+date_time+"&date_week="+date_week+
+                            +datemin+"&limit="+limit+"&price="+price+"&detail="+detail+"&tutor="+tutor+"&date_time="+date_time+"&real_date="+real_date+
                             "&class_time="+class_time+"&image="+imageUrl+"&tutorid="+uid;
                     Log.i("클래스등록서", sendMessage);
                     ConnectServer connectserver = new ConnectServer(sendMessage, "ClassRegister.jsp");
@@ -341,7 +348,7 @@ public class ClassaddActivity extends AppCompatActivity {
         price2.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
         price3.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
     }
-    void show()
+  /*  void show()
     {
         final List<String> ListItems = new ArrayList<>();
         ListItems.add("월");
@@ -403,16 +410,33 @@ public class ClassaddActivity extends AppCompatActivity {
                     }
                 });
         builder.show();
-    }
+    }*/
     public void InitializeListener()
     {
-        callbackMethod = new DatePickerDialog.OnDateSetListener()
+        callbackMethod1 = new DatePickerDialog.OnDateSetListener()
         {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
             {
-                due_date = year+"-"+monthOfYear+1+"-"+dayOfMonth;
-                classduedate.setText("마감 날짜 : "+year + "년" + monthOfYear+1 + "월" + dayOfMonth + "일");
+                monthOfYear += 1;
+                due_date = year+"-"+monthOfYear+"-"+dayOfMonth;
+                du_day = dayOfMonth;
+                du_month = monthOfYear-1;
+                du_year = year;
+                classduedate.setText("마감 날짜 : "+year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+            }
+        };
+        callbackMethod2 = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+            {
+                monthOfYear += 1;
+                d_day = dayOfMonth;
+                d_month = monthOfYear-1;
+                d_year = year;
+                real_date = year+"-"+monthOfYear+"-"+dayOfMonth;
+                classWeek.setText("수업 날짜 : "+year + "년" +monthOfYear+  "월" + dayOfMonth + "일");
             }
         };
     }

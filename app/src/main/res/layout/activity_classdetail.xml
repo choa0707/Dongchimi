@@ -51,6 +51,7 @@
 
             <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/detailnetworkImageView"
+                android:scaleType="fitXY"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
