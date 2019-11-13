@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
     private MypageFragmentTutor mypageFragmentTutor = new MypageFragmentTutor();
     private CategoryFragment categoryfragment = new CategoryFragment();
     private WishFragment wishFragment = new WishFragment();
-
+BackPressCloseHandler backPressCloseHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences autoLogin = getSharedPreferences("auto", Activity.MODE_PRIVATE);
         BottomNavigationView bottomNavigationView = findViewById(R.id.mainActivity_bottom_navigation_view);
-
+        backPressCloseHandler = new BackPressCloseHandler(this);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.mainActivity_frame_layout, homefragment).commitAllowingStateLoss();
 
@@ -78,4 +78,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void onBackPressed() { //super.onBackPressed();
+        backPressCloseHandler.onBackPressed(); }
 }

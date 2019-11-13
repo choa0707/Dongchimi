@@ -39,11 +39,11 @@ import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 public class HomeViewpagerAdapter3 extends PagerAdapter {
-    TextView priceText;
+    TextView priceText, title;
     private NetworkImageView mNetworkImageView;
     private ImageLoader mImageLoader;
     ClassData classData[] = new ClassData[4];
-    private String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
+    private String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
     int uid;
     private LayoutInflater inflater;
     private Context context;
@@ -58,13 +58,15 @@ public class HomeViewpagerAdapter3 extends PagerAdapter {
 
     private void connectServer() {
         String sendMessage = "";
+        int end;
         ConnectServer connectserver = new ConnectServer(sendMessage, "getClassData_new.jsp");
         try {
             String result = connectserver.execute().get();
             Log.i("클래스데이터new", result);
             String result_set[] = result.split("@#");
-
-            for (int i = 0; i < 3; i++)
+            if (result_set.length < 3) end = result_set.length;
+            else end = 3;
+            for (int i = 0; i < end; i++)
             {
                 String result_data[] = result_set[i].split("#@");
                 Log.i("클래스데이터", result_data[0]);
@@ -100,11 +102,12 @@ public class HomeViewpagerAdapter3 extends PagerAdapter {
         //ImageView imageView = (ImageView)v.findViewById(R.id.home_imageview);
         priceText =(TextView)v.findViewById(R.id.homefragment_price);
         mNetworkImageView = (NetworkImageView)v.findViewById(R.id.networkImageView);
-        LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/"+classData[position].getImage_url();
+        LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+classData[position].getImage_url();
         Log.i("이미지주소", LOGIN_REQUEST_URL);
         mNetworkImageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         priceText.setText(Integer.toString(classData[position].getPrice())+"원/회당");
-
+        title=(TextView)v.findViewById(R.id.homefragment_title);
+        title.setText((classData[position].getName()));
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override

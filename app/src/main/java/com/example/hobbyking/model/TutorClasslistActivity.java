@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.hobbyking.R;
 import com.example.hobbyking.data.ClassData;
@@ -22,15 +23,23 @@ public class TutorClasslistActivity extends AppCompatActivity {
     private RecyclerView tutorClassRecyclerView;
     private ArrayList<ClassData> classData = new ArrayList<>();
     private int uid;
+    ImageButton back;
     private TutorClassAdapter tutorClassAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutor_classlist);
+        back = (ImageButton)findViewById(R.id.tutor_class_back);
         SharedPreferences autoLogin = getSharedPreferences("auto", Context.MODE_PRIVATE);
         uid = autoLogin.getInt("UID", 0);
         classData.clear();
+        back.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         tutorClassRecyclerView = findViewById(R.id.rv_tutorclass);
         tutorClassAdapter = new TutorClassAdapter(classData, getApplicationContext());
 

@@ -3,8 +3,11 @@ package com.example.hobbyking.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +15,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.hobbyking.R;
 import com.example.hobbyking.data.ClassData;
+import com.example.hobbyking.model.BackPressCloseHandler;
 import com.example.hobbyking.server.ConnectServer;
 
 import java.util.ArrayList;
@@ -25,7 +34,14 @@ public class CategoryListFragment extends Fragment {
     private ArrayList<ClassData> classData = new ArrayList<>();
     private RecyclerView categoryRecyclerView;
     private int categoryId=999;
-
+    private BackPressCloseHandler backPressCloseHandler;
+    ImageButton back;
+    String[] name_set = {"뷰티", "프로그래밍", "여행", "영상제작", "운동","영어회화","요리","포토샵","음악","중국어","주식"};
+    CategoryFragment categoryFragment;
+    TextView category_name;
+    Spinner sort_spinner;
+    int current_sort=0;
+    FragmentTransaction transaction;    FragmentManager fragmentManager;
     private CategoryRecyclerAdapter categoryAdapter;
 //    private RecyclerView.LayoutManager wishLayoutManager;
 
@@ -38,15 +54,49 @@ public class CategoryListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_category_list, container, false);
+         sort_spinner = (Spinner)view.findViewById(R.id.category_sort_spinner);
+        back = (ImageButton)view.findViewById(R.id.backbtn);
         classData.clear();
         categoryRecyclerView = view.findViewById(R.id.rv_category);
-        categoryAdapter = new CategoryRecyclerAdapter(categoryId, getContext());
-
+        categoryAdapter = new CategoryRecyclerAdapter(categoryId, getContext(), current_sort);
+        category_name = (TextView)view.findViewById(R.id.category_name);
+        categoryFragment = new CategoryFragment();
         RecyclerView.LayoutManager categoryLayoutManager = new LinearLayoutManager(getActivity());
         categoryRecyclerView.setLayoutManager(categoryLayoutManager);
         categoryRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        category_name.setText(name_set[categoryId-1]);
         categoryRecyclerView.setAdapter(categoryAdapter);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.sort, android.R.layout.simple_spinner_item);
+        sort_spinner.setAdapter(adapter);
+        sort_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                current_sort = position;
+                categoryAdapter = new CategoryRecyclerAdapter(categoryId, getContext(), current_sort);
+                Log.i("sort", Integer.toString(current_sort));
+                categoryRecyclerView.setAdapter(categoryAdapter);
+                adapter.notifyDataSetChanged();
+              //  connectServer();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                current_sort = 0;
+              //  connectServer();
+            }
+        });
+
+
+        back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                fragmentManager = getFragmentManager();
+                assert fragmentManager != null;
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.mainActivity_frame_layout, categoryFragment).commitAllowingStateLoss();
+            }
+        });
         return view;
 
     }
@@ -69,15 +119,12 @@ public class CategoryListFragment extends Fragment {
         if (getArguments() != null) {
             categoryId = getArguments().getInt("position")+1;
         }
-        getData();
+       // connectServer();
     }
 
-    private void getData(){
-        connectServer();
-    }
     private void connectServer() {
         Log.i("카테고리", "요청 카테고리id"+categoryId);
-        String sendMessage = "category="+categoryId;
+        String sendMessage = "category="+categoryId+"&sort="+current_sort;
         ConnectServer connectserver = new ConnectServer(sendMessage, "getClassData_category.jsp");
         try {
             String result = connectserver.execute().get();
@@ -102,4 +149,7 @@ public class CategoryListFragment extends Fragment {
             e.printStackTrace();
         }
     }
+    public void onBackPressed() { //super.onBackPressed();
+         backPressCloseHandler.onBackPressed(); }
+
 }

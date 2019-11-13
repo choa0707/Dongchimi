@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,12 +36,13 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ClassdetailActivity extends AppCompatActivity {
-    private static final String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
+    private static String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
     TextView classname, classprice;
     private ClassData classData;
-    Button class_apply_button;
+    Button class_apply_button, warning;
     int isfavorit = 0;
     ImageButton back, favorit;
+    RatingBar class_rate;
     private ImageLoader mImageLoader;
     CustomSwipeAdapter adapter;
     ViewPager viewPager;
@@ -54,19 +56,24 @@ NetworkImageView mNetworkImageView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classdetail);
         class_apply_button = (Button)findViewById(R.id.classapply);
+        class_rate = (RatingBar)findViewById(R.id.class_rate);
         favorit = (ImageButton)findViewById(R.id.addfavorit);
         back = (ImageButton)findViewById(R.id.backbtn);
         mImageLoader = VolleyHelper.getInstance(getApplicationContext()).getImageLoader();
         mNetworkImageView = (NetworkImageView) findViewById(R.id.detailnetworkImageView);
-        mNetworkImageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
+
         classname = (TextView)findViewById(R.id.classTitle);
         classprice = (TextView)findViewById(R.id.classPrice);
+        warning = (Button)findViewById(R.id.warning);
         classData = (ClassData)getIntent().getSerializableExtra("ClassData");
+        class_rate.setRating((float) classData.getRating());
         classname.setText(classData.getName());
+        LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+classData.getImage_url();
+        mNetworkImageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         classprice.setText(classData.getPrice()+" 원/회당");
         if (classData.getPeople_num() >= classData.getLimit_people_num())fail = 1;
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        Log.i("날짜비교", today);
+        Log.i("날짜비교", classData.getDuedate());
         String[] caltoday = today.split("-");
         String[] duedate = classData.getDuedate().split("-");
         Log.i("날짜비교", duedate[0]);
@@ -107,6 +114,13 @@ NetworkImageView mNetworkImageView;
         ClassinfoFragment classinfoFragment = new ClassinfoFragment();
         classinfoFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().replace(R.id.classFrame, classinfoFragment).commit();
+        warning.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                show2();
+            }
+        });
         favorit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,6 +304,31 @@ NetworkImageView mNetworkImageView;
                 });
         builder.show();
     }
+    void show2()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("신고");
+        builder.setMessage(classData.getName()+" 클래스를 신고하시겠습니까?");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(getApplicationContext(),"수강신청이 되었습니다.",Toast.LENGTH_LONG).show();
+                        warningClass();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        builder.show();
+    }
+
+    private void warningClass() {
+
+    }
+
     void Apply()
     {
         SharedPreferences autoLogin = this.getSharedPreferences("auto", Context.MODE_PRIVATE);

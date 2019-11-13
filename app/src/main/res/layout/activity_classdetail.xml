@@ -86,13 +86,33 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="30dp"
             android:text="영어회화 스터디"/>
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/classPrice"
-            android:layout_gravity="right"
-            android:textSize="20dp"
-            android:text="30,000원"/>
+            android:orientation="horizontal"
+            >
+
+            <android.support.v7.widget.AppCompatRatingBar
+                style="?android:attr/ratingBarStyleIndicator"
+                android:id="@+id/class_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:isIndicator="true"
+                android:max="5"
+                android:numStars="5"></android.support.v7.widget.AppCompatRatingBar>
+
+            <TextView
+                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:id="@+id/classPrice"
+                android:layout_gravity="right"
+                android:textSize="20dp"
+                android:text="30,000원"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,13 +143,22 @@
 
 
         </LinearLayout>
-        <FrameLayout
-            android:layout_margin="12dp"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/classFrame">
+            android:layout_height="180dp"
+            >
+            <LinearLayout
 
-        </FrameLayout>
+                android:layout_margin="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/classFrame"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,15 +171,11 @@
                 android:background="@drawable/btn_background_black"
                 android:layout_height="match_parent"
                 android:text="신청하기"
-                android:layout_weight="4"/>
+                android:layout_weight="5"/>
+
             <Button
                 android:layout_width="0dp"
-                android:background="@drawable/btn_background_black"
-                android:layout_height="match_parent"
-                android:text="1:1문의"
-                android:layout_weight="2"/>
-            <Button
-                android:layout_width="0dp"
+                android:id="@+id/warning"
                 android:background="@drawable/btn_background_black"
                 android:layout_height="match_parent"
                 android:text="신고"

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,31 +38,19 @@ public class CategoryFragment extends Fragment {
 
         fragment = inflater.inflate(R.layout.fragment_category, container, false);
 
-        String[] cate ={"OnLine","OffLine"};
+
         String[] cateOff = {"뷰티","프로그래밍","여행", "영상제작", "운동", "영어회화" , "요리",  "포토샵" , "음악" , "중국어","주식" };
 
 
 
-        ArrayAdapter<String> m1Adapter = new ArrayAdapter<String>(fragment.getContext(),android.R.layout.simple_list_item_1,cate);
-        ListView cate1 = (ListView)fragment.findViewById(R.id.category_actmain_cate1);
-        cate1.setAdapter(m1Adapter);
 
-        ArrayAdapter<String> m2Adapter = new ArrayAdapter<String>(fragment.getContext(),android.R.layout.simple_list_item_1,cateOff);
-        final ListView cate2 = (ListView)fragment.findViewById(R.id.cate2);
+        ArrayAdapter<String> m2Adapter = new ArrayAdapter<String>(fragment.getContext(),R.layout.gridview_item,cateOff);
+        final GridView cate2 = (GridView)fragment.findViewById(R.id.cate2);
+
         cate2.setAdapter(m2Adapter);
-
-
-
-        cate1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    cate2.setVisibility(View.VISIBLE);
-            }
-        });
+        cate2.setVisibility(View.VISIBLE);
 
         cate2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 fragmentManager = getFragmentManager();
@@ -73,4 +62,5 @@ public class CategoryFragment extends Fragment {
 
         return fragment;
     }
+
 }

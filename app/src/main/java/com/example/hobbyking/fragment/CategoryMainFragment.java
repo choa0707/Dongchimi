@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import com.example.hobbyking.R;
 
 public class CategoryMainFragment extends Fragment {
-
+    /////////미사용
     View fragment;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragment = inflater.inflate(R.layout.fragment_category_main, container, false);

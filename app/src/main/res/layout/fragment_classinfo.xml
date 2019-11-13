@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+
     android:layout_height="match_parent"
 
-    >
-    <TextView
-        android:id="@+id/detail_class"
-        android:textSize="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="영어 회화 실력 향상을 위한 오픽 스터디"
-        />
+    android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/detail_class"
+            android:textSize="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="영어 회화 실력 향상을 위한 오픽 스터디"
+            />
+
+
 
 </LinearLayout>
+    </ScrollView>

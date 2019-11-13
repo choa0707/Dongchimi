@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.hobbyking.R;
+import com.example.hobbyking.model.BackPressCloseHandler;
 import com.example.hobbyking.model.CircleAnimIndicator;
 import com.example.hobbyking.model.HomeViewpagerAdapter1;
 import com.example.hobbyking.model.HomeViewpagerAdapter2;
@@ -26,7 +27,7 @@ public class HomeFragment extends Fragment {
     HomeViewpagerAdapter3 adapter3;
     ViewPager viewPager1,viewPager2,viewPager3;
     private CircleAnimIndicator circleAnimIndicator,circleAnimIndicator2,circleAnimIndicator3;
-
+    BackPressCloseHandler backPressCloseHandler;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -108,4 +109,6 @@ public class HomeFragment extends Fragment {
         public void onPageScrollStateChanged(int state) {
         }
     };
+    public void onBackPressed() { //super.onBackPressed();
+        backPressCloseHandler.onBackPressed(); }
 }

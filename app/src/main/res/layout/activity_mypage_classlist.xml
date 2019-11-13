@@ -19,25 +19,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+
 
                 <ImageButton
-                    android:id="@+id/category_cate_2_backbtn"
+                    android:layout_width="25dp" android:layout_height="25dp"
+                    android:id="@+id/list_backbtn"
                     android:layout_margin="10dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    android:src="@drawable/ic__back"
-                    app:layout_constraintBottom_toBottomOf="@+id/category_cate_2_divider"
-                    android:layout_width="25dp" android:layout_height="25dp"
-                    />
+                    android:src="@drawable/ic__back" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
-                    android:paddingLeft="120dp"
+                    android:paddingLeft="100dp"
                     android:layout_gravity="center"
-
-                    android:text="수강목록"
+                    android:text="수강 목록"
+                    android:textSize="20dp"
 
                     />
 

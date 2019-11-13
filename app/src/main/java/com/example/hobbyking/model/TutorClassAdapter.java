@@ -34,7 +34,7 @@ public class TutorClassAdapter extends RecyclerView.Adapter<TutorClassAdapter.It
     private RatingDialog ratingDialog;
     Context contextt;
     private ImageLoader mImageLoader;
-    private String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
+    private String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
     public TutorClassAdapter(ArrayList<ClassData> myData, Context context){
         this.listData = myData;
         SharedPreferences autoLogin = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
@@ -62,7 +62,7 @@ public class TutorClassAdapter extends RecyclerView.Adapter<TutorClassAdapter.It
                 //Log.i("클래스데이터", classData[0]);
                 ClassData temp;
                 temp = new ClassData(result_data[0],result_data[1],result_data[2],Integer.parseInt(result_data[3]), result_data[4],Double.parseDouble(result_data[5]),Integer.parseInt(result_data[6]), result_data[7], Integer.parseInt(result_data[8]), result_data[9], result_data[10], Integer.parseInt(result_data[11]),Integer.parseInt(result_data[12]), Integer.parseInt(result_data[13]));
-                temp.setState(Integer.parseInt(result_data[14]));
+                //temp.setState(Integer.parseInt(result_data[14]));
                 listData.add(temp);
             }
         } catch (ExecutionException e) {
@@ -141,7 +141,7 @@ public class TutorClassAdapter extends RecyclerView.Adapter<TutorClassAdapter.It
 
 
             imageView.setImageResource(R.drawable.noimage);
-            LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/"+data.getImage_url();
+            LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+data.getImage_url();
             Log.i("이미지주소", LOGIN_REQUEST_URL);
             imageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         }

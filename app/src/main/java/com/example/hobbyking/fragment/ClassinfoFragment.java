@@ -18,6 +18,7 @@ import com.example.hobbyking.data.ClassData;
 public class ClassinfoFragment extends Fragment {
     ClassData classData;
     TextView classinfo;
+    String a;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -25,6 +26,10 @@ public class ClassinfoFragment extends Fragment {
         Log.i("마지막테스트", classData.getName());
         View view = inflater.inflate(R.layout.fragment_classinfo, null);
         classinfo = (TextView)view.findViewById(R.id.detail_class);
+        classData.setDetail(classData.getDetail().replace("$", "\n"));
+        a = classData.getDetail().replace("$", "\n");
+        Log.i("마짐", classData.getDetail());
+        Log.i("마짐", a);
         classinfo.setText(classData.getDetail());
         return view;
     }

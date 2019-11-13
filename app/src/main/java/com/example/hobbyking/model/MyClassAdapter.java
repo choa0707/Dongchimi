@@ -31,16 +31,17 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.ItemView
 
     private ArrayList<ClassData> listData = new ArrayList<>();
     private int uid;
+    ClassData currentData;
+    Double rating;
     private RatingDialog ratingDialog;
     Context contextt;
     private ImageLoader mImageLoader;
-    private String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
+    private String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
     public MyClassAdapter(ArrayList<ClassData> myData, Context context){
         this.listData = myData;
         SharedPreferences autoLogin = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
         uid = autoLogin.getInt("UID", 0);
         contextt = context;
-
         mImageLoader = VolleyHelper.getInstance(context).getImageLoader();
         connectServer();
     }
@@ -79,20 +80,6 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.ItemView
 
         return new ItemViewHolder(view);
     }
-    private View.OnClickListener positiveListener = new View.OnClickListener() {
-        public void onClick(View v) {
-
-            Toast.makeText(contextt, "확인버튼이 눌렸습니다.",Toast.LENGTH_SHORT).show();
-            ratingDialog.dismiss();
-        }
-    };
-
-    private View.OnClickListener negativeListener = new View.OnClickListener() {
-        public void onClick(View v) {
-
-            ratingDialog.dismiss();
-        }
-    };
 
 
     @Override
@@ -101,14 +88,15 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.ItemView
         holder.ratingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listData.get(position).getState() != 0) {
-                    ratingDialog = new RatingDialog(holder.ratingButton.getContext(), positiveListener, negativeListener);
-                    ratingDialog.show();
-                }
+                //  if (listData.get(position).getState() == 2) {
+                currentData = listData.get(position);
+                ratingDialog = new RatingDialog(holder.ratingButton.getContext(), currentData, uid);
+                ratingDialog.show();
+           /*     }
                 else
                 {
                     Toast.makeText(holder.ratingButton.getContext(), "수강 승인 대기중인 강의는 평가할 수 없습니다.", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
         holder.imageView.setOnClickListener(new View.OnClickListener(){
@@ -166,7 +154,7 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.ItemView
             }
 
             imageView.setImageResource(R.drawable.noimage);
-            LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/"+data.getImage_url();
+            LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+data.getImage_url();
             Log.i("이미지주소", LOGIN_REQUEST_URL);
             imageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         }

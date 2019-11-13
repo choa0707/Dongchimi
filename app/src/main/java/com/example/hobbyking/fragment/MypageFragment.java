@@ -24,7 +24,7 @@ import com.example.hobbyking.model.TutorClasslistActivity;
 public class MypageFragment extends Fragment {
 
     View fragment;
-    Button classadd, myinfo, classlist, logout, tutor;
+    Button classadd, myinfo, classlist, logout, tutor, delete;
     Button tclasslist;
 
     @Nullable
@@ -35,13 +35,20 @@ public class MypageFragment extends Fragment {
 
         fragment = inflater.inflate(R.layout.fragment_mypage, container, false);
 
+
         myinfo = (Button)fragment.findViewById(R.id.mypage_myinfo);
         logout =(Button)fragment.findViewById(R.id.mypage_logout);
         classlist = (Button)fragment.findViewById(R.id.mypage_classlist);
+        delete = (Button)fragment.findViewById(R.id.delete_user);
 
         tutor = (Button)fragment.findViewById(R.id.mypage_tutor_register);
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         tutor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

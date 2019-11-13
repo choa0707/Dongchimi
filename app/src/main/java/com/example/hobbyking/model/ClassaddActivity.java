@@ -245,7 +245,7 @@ public class ClassaddActivity extends AppCompatActivity {
                     price0.setChecked(false);
                     price2.setChecked(false);
                     price3.setChecked(false);
-                    priceEdit.setText("10,000");
+                    priceEdit.setHint("10,000~30,000");
                 }
                 else{
                     price1.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.White));
@@ -261,7 +261,8 @@ public class ClassaddActivity extends AppCompatActivity {
                 if (price2.isChecked())
                 {allwhite();
                     price2.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.Yellow));
-                    priceEdit.setText("20,000");price0.setChecked(false);
+                    priceEdit.setHint("30,000~70,000");
+                    price0.setChecked(false);
                     price1.setChecked(false);
                     price3.setChecked(false);
                 }
@@ -280,7 +281,7 @@ public class ClassaddActivity extends AppCompatActivity {
                 {
                     allwhite();
                     price3.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.Yellow));
-                    priceEdit.setText("30,000");
+                    priceEdit.setHint("70,000~100,000");
                     price1.setChecked(false);
                     price2.setChecked(false);
                     price0.setChecked(false);
@@ -301,31 +302,38 @@ public class ClassaddActivity extends AppCompatActivity {
                 Log.i("클래스등록서", "테스트1");
                 if (check_ok())
                 {
-                    Log.i("클래스등록서", "테스트");
-                    int category_id = selectCategoryId();
-                    Log.i("클래스등록서", sendMessage);
-                    imageUrl = imageUrl.replace(" ","");
-                    Log.i("마지막 이미지", imageUrl);
-                    String sendMessage = "name="+title+"&category="+category_id+"&location="+location_name+"&duedate="+due_date+"&datehoure="+datehour +"&datemin="
-                            +datemin+"&limit="+limit+"&price="+price+"&detail="+detail+"&tutor="+tutor+"&date_time="+date_time+"&real_date="+real_date+
-                            "&class_time="+class_time+"&image="+imageUrl+"&tutorid="+uid;
-                    Log.i("클래스등록서", sendMessage);
-                    ConnectServer connectserver = new ConnectServer(sendMessage, "ClassRegister.jsp");
-                    String result = null;
-                    try {
-                        result = connectserver.execute().get().toString();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if (check_price())
+                    {
+                        Log.i("클래스등록서", "테스트");
+                        int category_id = selectCategoryId();
+                        Log.i("클래스등록서", sendMessage);
+                        imageUrl = imageUrl.replace(" ","");
+                        Log.i("마지막 이미지", imageUrl);
+                        String sendMessage = "name="+title+"&category="+category_id+"&location="+location_name+"&duedate="+due_date+"&datehoure="+datehour +"&datemin="
+                                +datemin+"&limit="+limit+"&price="+price+"&detail="+detail+"&tutor="+tutor+"&date_time="+date_time+"&real_date="+real_date+
+                                "&class_time="+class_time+"&image="+imageUrl+"&tutorid="+uid;
+                        Log.i("클래스등록서", sendMessage);
+                        ConnectServer connectserver = new ConnectServer(sendMessage, "ClassRegister.jsp");
+                        String result = null;
+                        try {
+                            result = connectserver.execute().get().toString();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(result.equals("success    ")) {
+                            Toast.makeText(getApplicationContext(),"수업이 추가되었습니다.",Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else if(result.equals("fail    ")) {
+
+                            Toast.makeText(getApplicationContext(),"실패하였습니다.",Toast.LENGTH_SHORT).show();
+                        }
                     }
-
-                    if(result.equals("success    ")) {
-                        Toast.makeText(getApplicationContext(),"수업이 추가되었습니다.",Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else if(result.equals("fail    ")) {
-
-                        Toast.makeText(getApplicationContext(),"실패하였습니다.",Toast.LENGTH_SHORT).show();
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "범위에 맞는 금액을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
@@ -338,6 +346,14 @@ public class ClassaddActivity extends AppCompatActivity {
         });
 
     }
+
+    private boolean check_price() {
+         if ((price0.isChecked() && !priceEdit.getText().toString().equals("0")) || (price1.isChecked() && (Integer.parseInt(priceEdit.getText().toString()) < 0 || Integer.parseInt(priceEdit.getText().toString()) > 30000)) || (price2.isChecked() && (Integer.parseInt(priceEdit.getText().toString()) < 30000 || Integer.parseInt(priceEdit.getText().toString()) > 70000)) || (price3.isChecked() && (Integer.parseInt(priceEdit.getText().toString()) < 70000)))
+         {
+            return false;
+         }else return true;
+    }
+
     void allwhite()
     {price0.setBackgroundResource(R.drawable.btn_background_black);
         price1.setBackgroundResource(R.drawable.btn_background_black);
@@ -486,7 +502,7 @@ public class ClassaddActivity extends AppCompatActivity {
 
                 try {
                     img_path = getImagePathToUri(data.getData()); //이미지의 URI를 얻어 경로값으로 반환.
-                    Toast.makeText(getBaseContext(), "img_path : " + img_path, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getBaseContext(), "img_path : " + img_path, Toast.LENGTH_SHORT).show();
                     //이미지를 비트맵형식으로 반환
                     Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
                     int reWidth = (int) (getWindowManager().getDefaultDisplay().getWidth());
@@ -521,10 +537,10 @@ public class ClassaddActivity extends AppCompatActivity {
 
         //이미지의 이름 값
         String imgName = imgPath.substring(imgPath.lastIndexOf("/") + 1);
-        Toast.makeText(ClassaddActivity.this, "이미지 이름 : " + imgName, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ClassaddActivity.this, "이미지를 추가하였습니다.", Toast.LENGTH_SHORT).show();
         this.imageName = imgName;
 
-        DoFileUpload("http://115.23.171.192:2180/HobbyKing/get_image.jsp", imgPath);  //해당 함수를 통해 이미지 전송.
+        DoFileUpload("http://192.168.56.1:8080/HobbyKing/get_image.jsp", imgPath);  //해당 함수를 통해 이미지 전송.
 
         return imgPath;
     }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.hobbyking.R;
@@ -16,11 +18,21 @@ import java.util.concurrent.ExecutionException;
 public class TuteeListActivity extends AppCompatActivity {
     private ListView m_oListView = null;
     int classid;
+    private  ImageButton back;
     ArrayList<TuteeData> oData = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutee_list);
+        back = (ImageButton)findViewById(R.id.tutee_backbtn);
+
+        back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Intent intent = getIntent();
         classid = intent.getExtras().getInt("classid");
 

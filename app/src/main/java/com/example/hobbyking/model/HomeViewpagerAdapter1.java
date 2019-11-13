@@ -39,11 +39,11 @@ import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 public class HomeViewpagerAdapter1 extends PagerAdapter {
-    TextView priceText;
+    TextView priceText, title;
     private NetworkImageView mNetworkImageView;
     private ImageLoader mImageLoader;
-    ClassData classData[] = new ClassData[4];
-    private String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
+    private  ClassData classData[] = new ClassData[4];
+    private String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
     int uid;
     private LayoutInflater inflater;
     private Context context;
@@ -51,6 +51,7 @@ public class HomeViewpagerAdapter1 extends PagerAdapter {
     public HomeViewpagerAdapter1(Context context){
         this.context = context;
         SharedPreferences autoLogin = this.context.getSharedPreferences("auto", Context.MODE_PRIVATE);
+
         uid = autoLogin.getInt("UID", 0);
         connectServer();
         mImageLoader = VolleyHelper.getInstance(context).getImageLoader();
@@ -60,18 +61,22 @@ public class HomeViewpagerAdapter1 extends PagerAdapter {
 
     private void connectServer() {
         String sendMessage = "userid="+uid;
+        int end;
         ConnectServer connectserver = new ConnectServer(sendMessage, "getClassData_favorit.jsp");
         try {
             String result = connectserver.execute().get();
             Log.i("클래스데이터", result);
             String result_set[] = result.split("@#");
-
-            for (int i = 0; i < 3; i++)
+            if (result_set.length-1 < 3) end = result_set.length-1;
+            else end = 3;
+            Log.i("fdsa", Integer.toString(end));
+            for (int i = 0; i < end; i++)
             {
                 String result_data[] = result_set[i].split("#@");
                 Log.i("클래스데이터", result_data[0]);
                 //Log.i("클래스데이터", result_data[0]);
                 //Log.i("클래스데이터", classData[0]);
+                for (int j = 0; j < 14; j++) Log.i("asdf", result_data[j]);
                 classData[i]  = new ClassData(result_data[0],result_data[1],result_data[2],Integer.parseInt(result_data[3]), result_data[4],Double.parseDouble(result_data[5]),Integer.parseInt(result_data[6]), result_data[7], Integer.parseInt(result_data[8]), result_data[9], result_data[10], Integer.parseInt(result_data[11]), Integer.parseInt(result_data[12]), Integer.parseInt(result_data[13]));
             }
         } catch (ExecutionException e) {
@@ -101,11 +106,19 @@ public class HomeViewpagerAdapter1 extends PagerAdapter {
         View v = inflater.inflate(R.layout.slider, container, false);
         //ImageView imageView = (ImageView)v.findViewById(R.id.home_imageview);
         priceText =(TextView)v.findViewById(R.id.homefragment_price);
+        title = (TextView)v.findViewById(R.id.homefragment_title);
         mNetworkImageView = (NetworkImageView)v.findViewById(R.id.networkImageView);
-        LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/"+classData[position].getImage_url();
+        try{
+            LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+classData[position].getImage_url();
+        }catch (Exception e)
+        {
+            LOGIN_REQUEST_URL = "IMG_20191014_09533111.jpg";
+        }
+
         Log.i("이미지주소", LOGIN_REQUEST_URL);
         mNetworkImageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         priceText.setText(Integer.toString(classData[position].getPrice())+"원/회당");
+        title.setText((classData[position].getName()));
 
 
         v.setOnClickListener(new View.OnClickListener() {
