@@ -42,31 +42,82 @@
                 android:gravity="center_vertical"
 
                 >
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/namecolor"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="이름"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/namecolor"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="이름"
+                        />
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tutee_mypage_name"
+                        android:text="홍길동"
+                        ></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/gendercolor"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="성별"/>
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/gendercolor"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="성별"/>
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tutee_mypage_gender"
+                        android:text="남자"
+                        ></TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/agecolor"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="나이"/>
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/agecolor"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="나이"/>
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tutee_mypage_age"
+                        android:text="24세"
+                        ></TextView>
+                </LinearLayout>
 
             </LinearLayout>
 

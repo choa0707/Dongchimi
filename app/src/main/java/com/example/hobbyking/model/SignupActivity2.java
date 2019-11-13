@@ -52,7 +52,7 @@ public class SignupActivity2 extends AppCompatActivity {
         String pwd = intent.getExtras().getString("pwd");
         String pwdcheck = intent.getExtras().getString("pwdcheck");
         String name = intent.getExtras().getString("name");
-       // String birth = intent.getExtras().getString("birth");
+        String birth = intent.getExtras().getString("birth");
         String gender = intent.getExtras().getString("gender");
 
 
@@ -94,7 +94,8 @@ public class SignupActivity2 extends AppCompatActivity {
                     }
                     Log.i("클래스카테고리 테스트", classCategoryString);
 
-                    String sendMessage = "id="+email+"&pwd="+pwd+"&name="+name+"&gender="+gender+"&classCategory="+classCategoryString+"&type=join";
+                    String sendMessage = "id="+email+"&pwd="+pwd+"&name="+name+"&gender="+gender+"&classCategory="+classCategoryString+"&type=join"+"&birth="+birth;
+                    Log.i("생년원일", sendMessage);
                     ConnectServer connectserver = new ConnectServer(sendMessage, "Login.jsp");
                     String result = connectserver.execute().get().toString();
 

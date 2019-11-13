@@ -34,7 +34,7 @@ public class TutorClassAdapter extends RecyclerView.Adapter<TutorClassAdapter.It
     private RatingDialog ratingDialog;
     Context contextt;
     private ImageLoader mImageLoader;
-    private String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
+    private String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
     public TutorClassAdapter(ArrayList<ClassData> myData, Context context){
         this.listData = myData;
         SharedPreferences autoLogin = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
@@ -141,7 +141,7 @@ public class TutorClassAdapter extends RecyclerView.Adapter<TutorClassAdapter.It
 
 
             imageView.setImageResource(R.drawable.noimage);
-            LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+data.getImage_url();
+            LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/"+data.getImage_url();
             Log.i("이미지주소", LOGIN_REQUEST_URL);
             imageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         }

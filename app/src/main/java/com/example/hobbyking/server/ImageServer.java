@@ -23,7 +23,7 @@ public class ImageServer extends AsyncTask<String, Void, String> {
 
     public ImageServer(String sendMsg, String serverUrl, String fileName, int uid) {
         this.sendMsg = sendMsg;
-        this.serverUrl = "http://192.168.56.1:8080/HobbyKing/"+serverUrl;
+        this.serverUrl = "http://115.23.171.192:2180/HobbyKing/"+serverUrl;
         this.fileName = fileName;
         this.uid = uid;
     }

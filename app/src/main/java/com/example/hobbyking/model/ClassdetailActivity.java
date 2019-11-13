@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ClassdetailActivity extends AppCompatActivity {
-    private static String LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/IMG_20191014_09533111.jpg";
+    private static String LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/IMG_20191014_09533111.jpg";
     TextView classname, classprice;
     private ClassData classData;
     Button class_apply_button, warning;
@@ -46,8 +46,10 @@ public class ClassdetailActivity extends AppCompatActivity {
     private ImageLoader mImageLoader;
     CustomSwipeAdapter adapter;
     ViewPager viewPager;
+    int iswarning = 0;
     int fail = 0;
     int over = 0;
+    int uid;
     private CircleAnimIndicator circleAnimIndicator;
 //detailnetworkImageView
 NetworkImageView mNetworkImageView;
@@ -61,14 +63,15 @@ NetworkImageView mNetworkImageView;
         back = (ImageButton)findViewById(R.id.backbtn);
         mImageLoader = VolleyHelper.getInstance(getApplicationContext()).getImageLoader();
         mNetworkImageView = (NetworkImageView) findViewById(R.id.detailnetworkImageView);
-
+        SharedPreferences autoLogin = this.getSharedPreferences("auto", Context.MODE_PRIVATE);
+         uid = autoLogin.getInt("UID", 0);
         classname = (TextView)findViewById(R.id.classTitle);
         classprice = (TextView)findViewById(R.id.classPrice);
         warning = (Button)findViewById(R.id.warning);
         classData = (ClassData)getIntent().getSerializableExtra("ClassData");
         class_rate.setRating((float) classData.getRating());
         classname.setText(classData.getName());
-        LOGIN_REQUEST_URL = "http://192.168.56.1:8080/HobbyKing/"+classData.getImage_url();
+        LOGIN_REQUEST_URL = "http://115.23.171.192:2180/HobbyKing/"+classData.getImage_url();
         mNetworkImageView.setImageUrl(LOGIN_REQUEST_URL, mImageLoader);
         classprice.setText(classData.getPrice()+" 원/회당");
         if (classData.getPeople_num() >= classData.getLimit_people_num())fail = 1;
@@ -83,6 +86,16 @@ NetworkImageView mNetworkImageView;
         Log.i("날짜비교", caltoday[1]);
         Log.i("날짜비교", caltoday[2]);
 
+        //신고 3번 이상 과목인지 확인
+        check_warning();
+
+        if (iswarning == 1)
+        {
+            class_apply_button.setEnabled(false);
+        }else
+        {
+            class_apply_button.setEnabled(true);
+        }
         if (Integer.parseInt(duedate[0]) < Integer.parseInt(caltoday[0])) over = 1;
         else if (Integer.parseInt(duedate[0]) == Integer.parseInt(caltoday[0]))
         {
@@ -195,9 +208,29 @@ NetworkImageView mNetworkImageView;
         });
     }
 
+    private void check_warning() {
+        String sendMessage = "cid="+classData.getClassid();
+        ConnectServer connectserver = new ConnectServer(sendMessage, "check_warning.jsp");
+        try {
+            String result = connectserver.execute().get();
+            if (result.equals("true    "))
+            {
+                iswarning = 1;
+            }else if (result.equals("false    "))
+            {
+                iswarning = 0;
+            }else if (result.equals("fail    "))
+            {
+                iswarning = 2;
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void deleteFavorit() {
-        SharedPreferences autoLogin = this.getSharedPreferences("auto", Context.MODE_PRIVATE);
-        int uid = autoLogin.getInt("UID", 0);
         String sendMessage = "uid="+uid+"&classid="+classData.getClassid();
         ConnectServer connectserver = new ConnectServer(sendMessage, "deletefavorit.jsp");
         try {
@@ -326,7 +359,29 @@ NetworkImageView mNetworkImageView;
     }
 
     private void warningClass() {
+        String sendMessage = "userid="+uid+"&cid="+classData.getClassid();
+        ConnectServer connectserver = new ConnectServer(sendMessage, "warning.jsp");
+        try {
+            String result = connectserver.execute().get();
+            if (result.equals("success    "))
+            {
+                Toast.makeText(getApplicationContext(), "신고가 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+            }else if (result.equals("already    "))
+            {
+                Toast.makeText(getApplicationContext(), "이미 신고하였습니다.", Toast.LENGTH_SHORT).show();
+            }else if (result.equals("nodata    "))
+            {
+                Toast.makeText(getApplicationContext(), "수강하지 않은 클래스입니다.", Toast.LENGTH_SHORT).show();
+            }else if (result.equals("false    "))
+            {
+                Toast.makeText(getApplicationContext(), "서버 문제로 신고가 완료되지 않았습니다.", Toast.LENGTH_SHORT).show();
+            }
 
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     void Apply()

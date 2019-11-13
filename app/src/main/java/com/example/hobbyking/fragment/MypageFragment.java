@@ -1,6 +1,7 @@
 package com.example.hobbyking.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hobbyking.R;
@@ -20,9 +22,13 @@ import com.example.hobbyking.model.MypageMyinfoActivity;
 import com.example.hobbyking.model.MypageTutorRegisterActivity;
 import com.example.hobbyking.model.SplashActivity;
 import com.example.hobbyking.model.TutorClasslistActivity;
+import com.example.hobbyking.server.ConnectServer;
+
+import java.util.concurrent.ExecutionException;
 
 public class MypageFragment extends Fragment {
-
+    int uid;
+    TextView name, age, gender;
     View fragment;
     Button classadd, myinfo, classlist, logout, tutor, delete;
     Button tclasslist;
@@ -34,21 +40,20 @@ public class MypageFragment extends Fragment {
 
 
         fragment = inflater.inflate(R.layout.fragment_mypage, container, false);
-
+        SharedPreferences autoLogin = getActivity().getSharedPreferences("auto", Context.MODE_PRIVATE);
+        uid = autoLogin.getInt("UID", 0);
+        name = (TextView)fragment.findViewById(R.id.tutee_mypage_name);
+        age = (TextView)fragment.findViewById(R.id.tutee_mypage_age);
+        gender = (TextView)fragment.findViewById(R.id.tutee_mypage_gender);
+        getUserData();
 
         myinfo = (Button)fragment.findViewById(R.id.mypage_myinfo);
         logout =(Button)fragment.findViewById(R.id.mypage_logout);
         classlist = (Button)fragment.findViewById(R.id.mypage_classlist);
-        delete = (Button)fragment.findViewById(R.id.delete_user);
 
         tutor = (Button)fragment.findViewById(R.id.mypage_tutor_register);
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
         tutor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,5 +96,23 @@ public class MypageFragment extends Fragment {
         });
 
         return fragment;
+    }
+    private void getUserData() {
+        String sendMessage = "userid="+uid;
+        ConnectServer connectserver = new ConnectServer(sendMessage, "getUserData.jsp");
+        try {
+            String result = connectserver.execute().get();
+            Log.i("클래스데이터", result);
+            String result_set[] = result.split("/");
+            name.setText(result_set[0]);
+            if (result_set[1].equals("0")) gender.setText("남자");
+            else gender.setText("여자");
+            age.setText(result_set[2]);
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
