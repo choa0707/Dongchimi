@@ -30,6 +30,7 @@ public class MypageFragment extends Fragment {
     int uid;
     TextView name, age, gender;
     View fragment;
+    String result_set[];
     Button classadd, myinfo, classlist, logout, tutor, delete;
     Button tclasslist;
 
@@ -58,6 +59,9 @@ public class MypageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MypageTutorRegisterActivity.class);
+                intent.putExtra("name", result_set[0]);
+                intent.putExtra("age", result_set[2]);
+                intent.putExtra("gender", result_set[1]);
                 startActivity(intent);
             }
         });
@@ -103,7 +107,7 @@ public class MypageFragment extends Fragment {
         try {
             String result = connectserver.execute().get();
             Log.i("클래스데이터", result);
-            String result_set[] = result.split("/");
+            result_set = result.split("/");
             name.setText(result_set[0]);
             if (result_set[1].equals("0")) gender.setText("남자");
             else gender.setText("여자");
